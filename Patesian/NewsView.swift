@@ -9,7 +9,19 @@ import SwiftUI
 
 struct NewsView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            List {
+                Text("Yaksh Mithani Gets Banned From the Music Room!")
+                Text("Elif awarded Miss Pate's 2023")
+                Text("Michael fumbles another baddie??")
+                Text("Aabha loses another scrunchie???")
+                Text("Jimin Fails Physics in Mocks!?!")
+            }
+            Button("bruh") {
+                let huh = schoolEvent(subject: "ass", teacher: "teach", location: "ya", start: Date.now, end: Date.now)
+                print(huh)
+            }
+        }
     }
 }
 

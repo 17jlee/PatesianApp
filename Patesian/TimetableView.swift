@@ -172,6 +172,7 @@ struct TimetableView: View {
         do {
             currentResponse = try decoder.decode(graphResponse.self, from: data)
             part2(current: (try decoder.decode(graphResponse.self, from: data)))
+            miseEnPlace1(currentResponse: try decoder.decode(graphResponse.self, from: data))
             //graphText = stringCreator(raw: currentResponse!)
         } catch {
             print(String(describing: error))
@@ -249,6 +250,23 @@ struct TimetableView: View {
         return(formatter1.string(from: date))
     }
     
+    func converter(data: [[Date : [[String : String]]]]) -> [Date: [schoolEvent]] {
+//        print("bruh")
+        var output = [Date: [schoolEvent]]()
+//        print(data.)
+        for x in data {
+            //print("\(x.keys[x.keys.startIndex])")
+            var objectList = [schoolEvent]()
+            for y in x.values.first! {
+                //print("\(y) \n")
+                //objectList.append(schoolEvent(subject: y["subject"]!, teacher: y["teacher"]!, location: y["location"]!, start: y["start"]!, end: y["end"]!))
+            }
+            //print(x.values)
+//            print("keys")
+        }
+        return ([Date.now : [schoolEvent(subject: "", teacher: "", location: "", start: Date.now, end: Date.now)]])
+    }
+    
     func miseEnPlace(currentResponse: graphResponse) -> [Date : [[String : String]]] {
         var dictionaryStruct = [Date : [[String : String]]]()
         for x in Array(currentResponse.value) {
@@ -263,7 +281,20 @@ struct TimetableView: View {
         return dictionaryStruct
     }
 
-    
+    func miseEnPlace1(currentResponse: graphResponse) -> [Date : [schoolEvent]] {
+        var dictionaryStruct = [Date : [schoolEvent]]()
+        for x in Array(currentResponse.value) {
+            if dictionaryStruct[x.start.dateTime.removeTimeStamp!] == nil {
+                dictionaryStruct[x.start.dateTime.removeTimeStamp!] = [schoolEvent(subject: subjectGet(raw: x.subject), teacher: teacherGet(raw: x.subject), location: subjectGet(raw: x.location.displayName), start: x.start.dateTime, end: x.end.dateTime)]
+            }
+            else {
+                dictionaryStruct[x.start.dateTime.removeTimeStamp!]!.append(schoolEvent(subject: subjectGet(raw: x.subject), teacher: teacherGet(raw: x.subject), location: subjectGet(raw: x.location.displayName), start: x.start.dateTime, end: x.end.dateTime))
+            }
+            
+        }
+        print("\(dictionaryStruct) \n")
+        return ([Date.now : [schoolEvent(subject: "", teacher: "", location: "", start: Date.now, end: Date.now)]])
+    }
     
     
     
@@ -386,7 +417,9 @@ struct TimetableView: View {
                 .onAppear() {
                     login()
                     //part2()
-                    print(currentResponse)
+                    //print(currentResponse)
+                    //print(sortbruh)
+                    converter(data: sortbruh)
 //                    hurray = miseEnPlace(currentResponse: currentResponse!)
 //                    //hurray = [Date.now : [["bruh" : "huh"]]]
 //                    //print(hurray)

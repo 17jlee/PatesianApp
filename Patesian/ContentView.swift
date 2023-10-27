@@ -18,7 +18,7 @@ extension CLLocationCoordinate2D {
     static let pates = CLLocationCoordinate2D(latitude: 51.9064680171035, longitude: -2.1159158133789875)
 }
 
-struct HomeView: View {
+struct MapView: View {
     var body: some View {
         Map() {
             Annotation("Pate's", coordinate: .pates) {
@@ -42,7 +42,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             NavigationStack {
-                HomeView()
+                MapView()
                     //.navigationTitle("Home+33")
             }
             .tabItem {
@@ -50,6 +50,7 @@ struct ContentView: View {
             }
 
             //Text("Timetable")
+            
             NavigationStack {
                 TimetableView()
                 .navigationTitle("Timetable")
@@ -58,13 +59,25 @@ struct ContentView: View {
                 Label("Timetable", systemImage: "calendar")
             }
             
+            NavigationStack {
+                NewsView()
+                .navigationTitle("News")
+                
+            }.tabItem {
+                Label("News", systemImage: "newspaper")
+            }
             
             NavigationStack {
-                Text("Events")
+                EventView()
+                    .navigationTitle("Events")
             }
                 .tabItem {
                     Label("Events", systemImage: "clock")
                 }
+            
+            
+            
+            
             NavigationStack {
                 SettingsView()
             }

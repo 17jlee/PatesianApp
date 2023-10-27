@@ -11,6 +11,7 @@
 		DB820A3E2AD686D20014F26B /* MSAL in Frameworks */ = {isa = PBXBuildFile; productRef = DB820A3D2AD686D20014F26B /* MSAL */; };
 		DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB820A412AD687730014F26B /* MSALAuthentication.swift */; };
 		DB9265A62AEBC767001A6BE5 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9265A52AEBC767001A6BE5 /* EventView.swift */; };
+		DBBBE0242AEBD74F006E2BB3 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBBE0232AEBD74F006E2BB3 /* NewsView.swift */; };
 		DBCBE5F22AD5E85F000B58E7 /* PatesianApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE5F12AD5E85F000B58E7 /* PatesianApp.swift */; };
 		DBCBE5F42AD5E85F000B58E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE5F32AD5E85F000B58E7 /* ContentView.swift */; };
 		DBCBE5F62AD5E861000B58E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBE5F52AD5E861000B58E7 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 		DB28ED7D2ADC28A9000094AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DB820A412AD687730014F26B /* MSALAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALAuthentication.swift; sourceTree = "<group>"; };
 		DB9265A52AEBC767001A6BE5 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
+		DBBBE0232AEBD74F006E2BB3 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		DBCBE5EE2AD5E85F000B58E7 /* Patesian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patesian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBE5F12AD5E85F000B58E7 /* PatesianApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatesianApp.swift; sourceTree = "<group>"; };
 		DBCBE5F32AD5E85F000B58E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				DB28ED7C2ADC283F000094AF /* Patesian.entitlements */,
 				DBCBE5F12AD5E85F000B58E7 /* PatesianApp.swift */,
 				DBCBE5F32AD5E85F000B58E7 /* ContentView.swift */,
+				DBBBE0232AEBD74F006E2BB3 /* NewsView.swift */,
 				DB28ED7A2ADC22DC000094AF /* TimetableView.swift */,
 				DB9265A52AEBC767001A6BE5 /* EventView.swift */,
 				DB820A412AD687730014F26B /* MSALAuthentication.swift */,
@@ -281,6 +284,7 @@
 				DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */,
 				DBCBE5F42AD5E85F000B58E7 /* ContentView.swift in Sources */,
 				DB28ED7B2ADC22DC000094AF /* TimetableView.swift in Sources */,
+				DBBBE0242AEBD74F006E2BB3 /* NewsView.swift in Sources */,
 				DBCBE5F22AD5E85F000B58E7 /* PatesianApp.swift in Sources */,
 				DB9265A62AEBC767001A6BE5 /* EventView.swift in Sources */,
 			);

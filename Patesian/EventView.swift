@@ -15,6 +15,8 @@ struct EventView: View {
             Text("MedSoc")
             Text("Taylor Swift Soc")
             Text("Debate Soc")
+            Text("School Council")
+            Text("House Dance")
         }
     }
 }
