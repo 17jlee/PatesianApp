@@ -22,7 +22,7 @@ extension Color {
     static var patesRedAlt: Color {Color(red: 0.86, green: 0.03, blue: 0.08)}
 }
 
-struct schoolEvent {
+struct schoolEvent: Hashable {
     var subject: String
     var teacher: String
     var location: String
@@ -134,8 +134,8 @@ struct TimetableView: View {
         })
     }
     
-    func period(start: String, end: String) -> String {
-        let combine = (start, end)
+    func period(start: Date, end: Date) -> String {
+        let combine = (timeformat(date: start), timeformat(date: end))
         switch combine {
         case("08:40", "08:55") :
             return("AM Registration")
@@ -183,6 +183,7 @@ struct TimetableView: View {
             currentResponse = try decoder.decode(graphResponse.self, from: data)
             part2(current: (try decoder.decode(graphResponse.self, from: data)))
             miseEnPlace1(currentResponse: try decoder.decode(graphResponse.self, from: data))
+            funk(res: currentResponse!)
             //graphText = stringCreator(raw: currentResponse!)
         } catch {
             print(String(describing: error))
@@ -300,13 +301,23 @@ struct TimetableView: View {
             else {
                 dictionaryStruct[x.start.dateTime.removeTimeStamp!]!.append(schoolEvent(subject: subjectGet(raw: x.subject), teacher: teacherGet(raw: x.subject), location: subjectGet(raw: x.location.displayName), start: x.start.dateTime, end: x.end.dateTime))
             }
-            for z in dictionaryStruct.keys {
-                dictionaryStruct[z]?.append(schoolEvent(subject: "Lunch", teacher: "", location: "", start: Date.now, end: Date.now))
-            }
+//            for z in dictionaryStruct.keys {
+//                dictionaryStruct[z]?.append(schoolEvent(subject: "Lunch", teacher: "", location: "", start: Date.now, end: Date.now))
+//            }
             
         }
         //print("\(dictionaryStruct) \n")
         return dictionaryStruct
+    }
+    
+    func funk(res: graphResponse) {
+        let result = (miseEnPlace1(currentResponse: res)).sorted {
+                                        $0.0 < $1.0
+                                    }
+        sortedData = fixesEverything1(trash: result)
+        for x in sortedData {
+            //print(x)
+        }
     }
     
     
@@ -316,6 +327,16 @@ struct TimetableView: View {
         
         
         VStack {
+            Button("try me") {
+                login()
+                for x in sortedData {
+                    print("\(x.keys.first)")
+                    for y in x[x.keys.first!]! {
+                        print("\(y) \n")
+                    }
+                }
+                
+            }
 //            if !listView {
 //                Button("debug") {
 //                    //                listmaker(currentResponse: currentResponse!)
@@ -345,7 +366,7 @@ struct TimetableView: View {
             List {
                 ForEach(sortedData, id: \.self) { x in
                     Section(dateformat(date: x.keys.first!)) {
-                        ForEach(x[x.keys[x.keys.startIndex]]!, id: \.self) { huh in
+                        ForEach(x[x.keys.first!]!, id: \.self) { eventObject in
                             HStack {
 
                                 RoundedRectangle(cornerRadius: 50)
@@ -353,33 +374,33 @@ struct TimetableView: View {
                                     .frame(width: 4, height: 40)
                                 VStack {
                                     HStack {
-                                        Text("\(String(huh["subject"]!))")
+                                        Text("\(String(eventObject.subject))")
                                             .font(Font.headline.weight(.bold))
                                         Spacer()
                                     }
 
                                     HStack {
-                                        if String(huh["location"]!) == "" && String(huh["teacher"]!) == "" {
+                                        if String(eventObject.location) == "" && String(eventObject.teacher) == "" {
                                             Text("")
                                                 .padding(.bottom, 3)
                                             //Spacer()
                                         }
-                                        else if String(huh["location"]!) == "" {
-                                            Text("\(String(huh["teacher"]!))")
+                                        else if String(eventObject.location) == "" {
+                                            Text("\(eventObject.teacher))")
                                                 .font(Font.headline.weight(.light))
                                         }
                                         else {
-                                            Text("\(String(huh["location"]!)) - \(String(huh["teacher"]!))")
+                                            Text("\(String(eventObject.location)) - \(String(eventObject.teacher))")
                                                 .font(Font.headline.weight(.light))
                                         }
                                         
                                         Spacer()
                                     }
                                     
-                                    if String(huh["location"]!) == "" && String(huh["teacher"]!) == "" {
-                                        //Text("")
-                                        //Spacer()
-                                    }
+//                                    if String(huh["location"]!) == "" && String(huh["teacher"]!) == "" {
+//                                        //Text("")
+//                                        //Spacer()
+//                                    }
 
                                 }
 
@@ -387,11 +408,11 @@ struct TimetableView: View {
                                 VStack {
                                     HStack {
                                         Spacer()
-                                        Text("\(period(start: huh["start"]!, end:huh["end"]!))")
+                                        Text("\(period(start: eventObject.start, end:eventObject.end))")
                                     }
                                     HStack {
                                         Spacer()
-                                        Text("\(String(huh["start"]!)) - \(String(huh["end"]!))")
+                                        Text("\(String(timeformat(date: eventObject.start))) - \(String(timeformat(date: eventObject.end)))")
                                     }
                                     
 
@@ -402,60 +423,60 @@ struct TimetableView: View {
                     }
                 }
             }
-            .listStyle(.plain)
-                .navigationTitle("Timetable")
-                .toolbar {
-                    ToolbarItem(placement: .automatic) {
-                        Button {
-                            listView.toggle()
-                            let result = (miseEnPlace1(currentResponse: currentResponse!)).sorted {
-                                $0.0 < $1.0
-                            }
-                            //print(miseEnPlace1(currentResponse: currentResponse!))
-                            //print(result)
-                            print(fixesEverything1(trash: result))
-                            
-                            sortedData = fixesEverything1(trash: result)
-                            
-                            //print(sortbruh)
-                        } label: {
-                            
-                            // your button label here
-                            if listView {
-                                Image(systemName: "calendar")
-                            }
-                            else {
-                                Image(systemName: "calendar.day.timeline.left")
-                            }
-
-
-                        }
-                    }
-
-                }
-                .refreshable {
-                    print("Refreshing")
-                }
-                .onAppear() {
-                    login()
-                    //part2()
-                    //print(currentResponse)
-                    //print(sortbruh)
-                    converter(data: sortbruh)
-//                    hurray = miseEnPlace(currentResponse: currentResponse!)
-//                    //hurray = [Date.now : [["bruh" : "huh"]]]
-//                    //print(hurray)
-//                    let result = hurray.sorted {
-//                        $0.0 < $1.0
+//            .listStyle(.plain)
+//                .navigationTitle("Timetable")
+//                .toolbar {
+//                    ToolbarItem(placement: .automatic) {
+//                        Button {
+//                            listView.toggle()
+//                            let result = (miseEnPlace1(currentResponse: currentResponse!)).sorted {
+//                                $0.0 < $1.0
+//                            }
+//                            //print(miseEnPlace1(currentResponse: currentResponse!))
+//                            //print(result)
+//                            print(fixesEverything1(trash: result))
+//                            
+//                            sortedData = fixesEverything1(trash: result)
+//                            
+//                            //print(sortbruh)
+//                        } label: {
+//                            
+//                            // your button label here
+//                            if listView {
+//                                Image(systemName: "calendar")
+//                            }
+//                            else {
+//                                Image(systemName: "calendar.day.timeline.left")
+//                            }
+//
+//
+//                        }
 //                    }
-//                    
-//                    //print(Array(result)[0])
-//                    //print(type(of: Array(result)[0]))
-//                    sortedDict = result
-//                    print(sortedDict)
-//                    sortbruh = fixesEverything(trash: result)
-                }
-            
+//
+//                }
+//                .refreshable {
+//                    print("Refreshing")
+//                }
+//                .onAppear() {
+//                    login()
+//                    //part2()
+//                    //print(currentResponse)
+//                    //print(sortbruh)
+//                    converter(data: sortbruh)
+////                    hurray = miseEnPlace(currentResponse: currentResponse!)
+////                    //hurray = [Date.now : [["bruh" : "huh"]]]
+////                    //print(hurray)
+////                    let result = hurray.sorted {
+////                        $0.0 < $1.0
+////                    }
+////                    
+////                    //print(Array(result)[0])
+////                    //print(type(of: Array(result)[0]))
+////                    sortedDict = result
+////                    print(sortedDict)
+////                    sortbruh = fixesEverything(trash: result)
+//                }
+//            
             
             
 //            Button("Login") {
