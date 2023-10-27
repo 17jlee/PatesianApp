@@ -1,0 +1,640 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DB28ED7B2ADC22DC000094AF /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28ED7A2ADC22DC000094AF /* TimetableView.swift */; };
+		DB820A3E2AD686D20014F26B /* MSAL in Frameworks */ = {isa = PBXBuildFile; productRef = DB820A3D2AD686D20014F26B /* MSAL */; };
+		DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB820A412AD687730014F26B /* MSALAuthentication.swift */; };
+		DB9265A62AEBC767001A6BE5 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9265A52AEBC767001A6BE5 /* EventView.swift */; };
+		DBCBE5F22AD5E85F000B58E7 /* PatesianApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE5F12AD5E85F000B58E7 /* PatesianApp.swift */; };
+		DBCBE5F42AD5E85F000B58E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE5F32AD5E85F000B58E7 /* ContentView.swift */; };
+		DBCBE5F62AD5E861000B58E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBE5F52AD5E861000B58E7 /* Assets.xcassets */; };
+		DBCBE5F92AD5E861000B58E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBE5F82AD5E861000B58E7 /* Preview Assets.xcassets */; };
+		DBCBE6032AD5E861000B58E7 /* PatesianTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE6022AD5E861000B58E7 /* PatesianTests.swift */; };
+		DBCBE60D2AD5E861000B58E7 /* PatesianUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE60C2AD5E861000B58E7 /* PatesianUITests.swift */; };
+		DBCBE60F2AD5E861000B58E7 /* PatesianUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE60E2AD5E861000B58E7 /* PatesianUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DBCBE5FF2AD5E861000B58E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCBE5E62AD5E85F000B58E7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBCBE5ED2AD5E85F000B58E7;
+			remoteInfo = Patesian;
+		};
+		DBCBE6092AD5E861000B58E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCBE5E62AD5E85F000B58E7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBCBE5ED2AD5E85F000B58E7;
+			remoteInfo = Patesian;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DB28ED7A2ADC22DC000094AF /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
+		DB28ED7C2ADC283F000094AF /* Patesian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Patesian.entitlements; sourceTree = "<group>"; };
+		DB28ED7D2ADC28A9000094AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DB820A412AD687730014F26B /* MSALAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALAuthentication.swift; sourceTree = "<group>"; };
+		DB9265A52AEBC767001A6BE5 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
+		DBCBE5EE2AD5E85F000B58E7 /* Patesian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patesian.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBCBE5F12AD5E85F000B58E7 /* PatesianApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatesianApp.swift; sourceTree = "<group>"; };
+		DBCBE5F32AD5E85F000B58E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DBCBE5F52AD5E861000B58E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DBCBE5F82AD5E861000B58E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DBCBE5FE2AD5E861000B58E7 /* PatesianTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PatesianTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBCBE6022AD5E861000B58E7 /* PatesianTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatesianTests.swift; sourceTree = "<group>"; };
+		DBCBE6082AD5E861000B58E7 /* PatesianUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PatesianUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBCBE60C2AD5E861000B58E7 /* PatesianUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatesianUITests.swift; sourceTree = "<group>"; };
+		DBCBE60E2AD5E861000B58E7 /* PatesianUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatesianUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DBCBE5EB2AD5E85F000B58E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB820A3E2AD686D20014F26B /* MSAL in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBCBE5FB2AD5E861000B58E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBCBE6052AD5E861000B58E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DBCBE5E52AD5E85F000B58E7 = {
+			isa = PBXGroup;
+			children = (
+				DBCBE5F02AD5E85F000B58E7 /* Patesian */,
+				DBCBE6012AD5E861000B58E7 /* PatesianTests */,
+				DBCBE60B2AD5E861000B58E7 /* PatesianUITests */,
+				DBCBE5EF2AD5E85F000B58E7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DBCBE5EF2AD5E85F000B58E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBE5EE2AD5E85F000B58E7 /* Patesian.app */,
+				DBCBE5FE2AD5E861000B58E7 /* PatesianTests.xctest */,
+				DBCBE6082AD5E861000B58E7 /* PatesianUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DBCBE5F02AD5E85F000B58E7 /* Patesian */ = {
+			isa = PBXGroup;
+			children = (
+				DB28ED7D2ADC28A9000094AF /* Info.plist */,
+				DB28ED7C2ADC283F000094AF /* Patesian.entitlements */,
+				DBCBE5F12AD5E85F000B58E7 /* PatesianApp.swift */,
+				DBCBE5F32AD5E85F000B58E7 /* ContentView.swift */,
+				DB28ED7A2ADC22DC000094AF /* TimetableView.swift */,
+				DB9265A52AEBC767001A6BE5 /* EventView.swift */,
+				DB820A412AD687730014F26B /* MSALAuthentication.swift */,
+				DBCBE5F52AD5E861000B58E7 /* Assets.xcassets */,
+				DBCBE5F72AD5E861000B58E7 /* Preview Content */,
+			);
+			path = Patesian;
+			sourceTree = "<group>";
+		};
+		DBCBE5F72AD5E861000B58E7 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBE5F82AD5E861000B58E7 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DBCBE6012AD5E861000B58E7 /* PatesianTests */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBE6022AD5E861000B58E7 /* PatesianTests.swift */,
+			);
+			path = PatesianTests;
+			sourceTree = "<group>";
+		};
+		DBCBE60B2AD5E861000B58E7 /* PatesianUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBE60C2AD5E861000B58E7 /* PatesianUITests.swift */,
+				DBCBE60E2AD5E861000B58E7 /* PatesianUITestsLaunchTests.swift */,
+			);
+			path = PatesianUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DBCBE5ED2AD5E85F000B58E7 /* Patesian */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DBCBE6122AD5E861000B58E7 /* Build configuration list for PBXNativeTarget "Patesian" */;
+			buildPhases = (
+				DBCBE5EA2AD5E85F000B58E7 /* Sources */,
+				DBCBE5EB2AD5E85F000B58E7 /* Frameworks */,
+				DBCBE5EC2AD5E85F000B58E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Patesian;
+			packageProductDependencies = (
+				DB820A3D2AD686D20014F26B /* MSAL */,
+			);
+			productName = Patesian;
+			productReference = DBCBE5EE2AD5E85F000B58E7 /* Patesian.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DBCBE5FD2AD5E861000B58E7 /* PatesianTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DBCBE6152AD5E861000B58E7 /* Build configuration list for PBXNativeTarget "PatesianTests" */;
+			buildPhases = (
+				DBCBE5FA2AD5E861000B58E7 /* Sources */,
+				DBCBE5FB2AD5E861000B58E7 /* Frameworks */,
+				DBCBE5FC2AD5E861000B58E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DBCBE6002AD5E861000B58E7 /* PBXTargetDependency */,
+			);
+			name = PatesianTests;
+			productName = PatesianTests;
+			productReference = DBCBE5FE2AD5E861000B58E7 /* PatesianTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DBCBE6072AD5E861000B58E7 /* PatesianUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DBCBE6182AD5E861000B58E7 /* Build configuration list for PBXNativeTarget "PatesianUITests" */;
+			buildPhases = (
+				DBCBE6042AD5E861000B58E7 /* Sources */,
+				DBCBE6052AD5E861000B58E7 /* Frameworks */,
+				DBCBE6062AD5E861000B58E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DBCBE60A2AD5E861000B58E7 /* PBXTargetDependency */,
+			);
+			name = PatesianUITests;
+			productName = PatesianUITests;
+			productReference = DBCBE6082AD5E861000B58E7 /* PatesianUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DBCBE5E62AD5E85F000B58E7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					DBCBE5ED2AD5E85F000B58E7 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					DBCBE5FD2AD5E861000B58E7 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = DBCBE5ED2AD5E85F000B58E7;
+					};
+					DBCBE6072AD5E861000B58E7 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = DBCBE5ED2AD5E85F000B58E7;
+					};
+				};
+			};
+			buildConfigurationList = DBCBE5E92AD5E85F000B58E7 /* Build configuration list for PBXProject "Patesian" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DBCBE5E52AD5E85F000B58E7;
+			packageReferences = (
+				DB820A3C2AD686D20014F26B /* XCRemoteSwiftPackageReference "microsoft-authentication-library-for-objc" */,
+			);
+			productRefGroup = DBCBE5EF2AD5E85F000B58E7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DBCBE5ED2AD5E85F000B58E7 /* Patesian */,
+				DBCBE5FD2AD5E861000B58E7 /* PatesianTests */,
+				DBCBE6072AD5E861000B58E7 /* PatesianUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DBCBE5EC2AD5E85F000B58E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBCBE5F92AD5E861000B58E7 /* Preview Assets.xcassets in Resources */,
+				DBCBE5F62AD5E861000B58E7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBCBE5FC2AD5E861000B58E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBCBE6062AD5E861000B58E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DBCBE5EA2AD5E85F000B58E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */,
+				DBCBE5F42AD5E85F000B58E7 /* ContentView.swift in Sources */,
+				DB28ED7B2ADC22DC000094AF /* TimetableView.swift in Sources */,
+				DBCBE5F22AD5E85F000B58E7 /* PatesianApp.swift in Sources */,
+				DB9265A62AEBC767001A6BE5 /* EventView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBCBE5FA2AD5E861000B58E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBCBE6032AD5E861000B58E7 /* PatesianTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBCBE6042AD5E861000B58E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBCBE60F2AD5E861000B58E7 /* PatesianUITestsLaunchTests.swift in Sources */,
+				DBCBE60D2AD5E861000B58E7 /* PatesianUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DBCBE6002AD5E861000B58E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DBCBE5ED2AD5E85F000B58E7 /* Patesian */;
+			targetProxy = DBCBE5FF2AD5E861000B58E7 /* PBXContainerItemProxy */;
+		};
+		DBCBE60A2AD5E861000B58E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DBCBE5ED2AD5E85F000B58E7 /* Patesian */;
+			targetProxy = DBCBE6092AD5E861000B58E7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		DBCBE6102AD5E861000B58E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DBCBE6112AD5E861000B58E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DBCBE6132AD5E861000B58E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Patesian/Patesian.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Patesian/Preview Content\"";
+				DEVELOPMENT_TEAM = 7998K88CRA;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Patesian/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jimin.Patesian;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DBCBE6142AD5E861000B58E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Patesian/Patesian.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Patesian/Preview Content\"";
+				DEVELOPMENT_TEAM = 7998K88CRA;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Patesian/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jimin.Patesian;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DBCBE6162AD5E861000B58E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7998K88CRA;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jimin.PatesianTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Patesian.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Patesian";
+			};
+			name = Debug;
+		};
+		DBCBE6172AD5E861000B58E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7998K88CRA;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jimin.PatesianTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Patesian.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Patesian";
+			};
+			name = Release;
+		};
+		DBCBE6192AD5E861000B58E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7998K88CRA;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jimin.PatesianUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Patesian;
+			};
+			name = Debug;
+		};
+		DBCBE61A2AD5E861000B58E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7998K88CRA;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jimin.PatesianUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Patesian;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DBCBE5E92AD5E85F000B58E7 /* Build configuration list for PBXProject "Patesian" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBCBE6102AD5E861000B58E7 /* Debug */,
+				DBCBE6112AD5E861000B58E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DBCBE6122AD5E861000B58E7 /* Build configuration list for PBXNativeTarget "Patesian" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBCBE6132AD5E861000B58E7 /* Debug */,
+				DBCBE6142AD5E861000B58E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DBCBE6152AD5E861000B58E7 /* Build configuration list for PBXNativeTarget "PatesianTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBCBE6162AD5E861000B58E7 /* Debug */,
+				DBCBE6172AD5E861000B58E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DBCBE6182AD5E861000B58E7 /* Build configuration list for PBXNativeTarget "PatesianUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBCBE6192AD5E861000B58E7 /* Debug */,
+				DBCBE61A2AD5E861000B58E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DB820A3C2AD686D20014F26B /* XCRemoteSwiftPackageReference "microsoft-authentication-library-for-objc" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AzureAD/microsoft-authentication-library-for-objc";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.17;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DB820A3D2AD686D20014F26B /* MSAL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB820A3C2AD686D20014F26B /* XCRemoteSwiftPackageReference "microsoft-authentication-library-for-objc" */;
+			productName = MSAL;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = DBCBE5E62AD5E85F000B58E7 /* Project object */;
+}

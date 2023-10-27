@@ -1,0 +1,84 @@
+//
+//  ContentView.swift
+//  Patesian
+//
+//  Created by Jimin Lee on 10/10/2023.
+//
+
+import SwiftUI
+import MapKit
+
+struct Location: Identifiable {
+    let id = UUID()
+    let name: String
+    let coordinate: CLLocationCoordinate2D
+}
+
+extension CLLocationCoordinate2D {
+    static let pates = CLLocationCoordinate2D(latitude: 51.9064680171035, longitude: -2.1159158133789875)
+}
+
+struct HomeView: View {
+    var body: some View {
+        Map() {
+            Annotation("Pate's", coordinate: .pates) {
+                
+            }
+        }
+    }
+}
+
+struct SettingsView: View {
+    var body: some View {
+        Text("Websites")
+    }
+    
+}
+
+
+
+
+struct ContentView: View {
+    var body: some View {
+        TabView {
+            NavigationStack {
+                HomeView()
+                    //.navigationTitle("Home+33")
+            }
+            .tabItem {
+                Label("Map", systemImage: "map")
+            }
+
+            //Text("Timetable")
+            NavigationStack {
+                TimetableView()
+                .navigationTitle("Timetable")
+                
+            }.tabItem {
+                Label("Timetable", systemImage: "calendar")
+            }
+            
+            
+            NavigationStack {
+                Text("Events")
+            }
+                .tabItem {
+                    Label("Events", systemImage: "clock")
+                }
+            NavigationStack {
+                SettingsView()
+            }
+            
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
+        }
+
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+  static var previews: some View {
+    ContentView()
+  }
+}
