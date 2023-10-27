@@ -61,6 +61,16 @@ struct TimetableView: View {
     @State var sortedDict = [[Date : [[String : String]]].Element]()
     @State var sortbruh = [[Date : [[String : String]]]]()
     @State var listView = false
+    @State var sortedData = [[Date: [schoolEvent]]]()
+    
+    func fixesEverything1(trash: [[Date: [schoolEvent]].Element]) ->  [[Date: [schoolEvent]]] {
+        var surt = [[Date: [schoolEvent]]]()
+        for x in trash {
+            //let dateNow = x.key
+            surt.append([x.key : x.value])
+        }
+        return surt
+    }
     
     func fixesEverything(trash: [[Date : [[String : String]]].Element]) ->  [[Date : [[String : String]]]] {
         var surt = [[Date : [[String : String]]]]()
@@ -290,10 +300,13 @@ struct TimetableView: View {
             else {
                 dictionaryStruct[x.start.dateTime.removeTimeStamp!]!.append(schoolEvent(subject: subjectGet(raw: x.subject), teacher: teacherGet(raw: x.subject), location: subjectGet(raw: x.location.displayName), start: x.start.dateTime, end: x.end.dateTime))
             }
+            for z in dictionaryStruct.keys {
+                dictionaryStruct[z]?.append(schoolEvent(subject: "Lunch", teacher: "", location: "", start: Date.now, end: Date.now))
+            }
             
         }
-        print("\(dictionaryStruct) \n")
-        return ([Date.now : [schoolEvent(subject: "", teacher: "", location: "", start: Date.now, end: Date.now)]])
+        //print("\(dictionaryStruct) \n")
+        return dictionaryStruct
     }
     
     
@@ -330,7 +343,7 @@ struct TimetableView: View {
             
             
             List {
-                ForEach(sortbruh, id: \.self) { x in
+                ForEach(sortedData, id: \.self) { x in
                     Section(dateformat(date: x.keys.first!)) {
                         ForEach(x[x.keys[x.keys.startIndex]]!, id: \.self) { huh in
                             HStack {
@@ -395,7 +408,16 @@ struct TimetableView: View {
                     ToolbarItem(placement: .automatic) {
                         Button {
                             listView.toggle()
-                            print(sortbruh)
+                            let result = (miseEnPlace1(currentResponse: currentResponse!)).sorted {
+                                $0.0 < $1.0
+                            }
+                            //print(miseEnPlace1(currentResponse: currentResponse!))
+                            //print(result)
+                            print(fixesEverything1(trash: result))
+                            
+                            sortedData = fixesEverything1(trash: result)
+                            
+                            //print(sortbruh)
                         } label: {
                             
                             // your button label here
