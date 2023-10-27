@@ -13,6 +13,8 @@ struct EventView: View {
         List {
             Text("Computing Society")
             Text("MedSoc")
+            Text("Taylor Swift Soc")
+            Text("Debate Soc")
         }
     }
 }
