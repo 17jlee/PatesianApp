@@ -12,6 +12,7 @@
 		DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB820A412AD687730014F26B /* MSALAuthentication.swift */; };
 		DB9265A62AEBC767001A6BE5 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9265A52AEBC767001A6BE5 /* EventView.swift */; };
 		DBBBE0242AEBD74F006E2BB3 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBBE0232AEBD74F006E2BB3 /* NewsView.swift */; };
+		DBBBE0262AEC6A62006E2BB3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBBE0252AEC6A62006E2BB3 /* SettingsView.swift */; };
 		DBCBE5F22AD5E85F000B58E7 /* PatesianApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE5F12AD5E85F000B58E7 /* PatesianApp.swift */; };
 		DBCBE5F42AD5E85F000B58E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE5F32AD5E85F000B58E7 /* ContentView.swift */; };
 		DBCBE5F62AD5E861000B58E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCBE5F52AD5E861000B58E7 /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		DB820A412AD687730014F26B /* MSALAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALAuthentication.swift; sourceTree = "<group>"; };
 		DB9265A52AEBC767001A6BE5 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		DBBBE0232AEBD74F006E2BB3 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
+		DBBBE0252AEC6A62006E2BB3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		DBCBE5EE2AD5E85F000B58E7 /* Patesian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patesian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBE5F12AD5E85F000B58E7 /* PatesianApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatesianApp.swift; sourceTree = "<group>"; };
 		DBCBE5F32AD5E85F000B58E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				DBCBE5F12AD5E85F000B58E7 /* PatesianApp.swift */,
 				DBCBE5F32AD5E85F000B58E7 /* ContentView.swift */,
 				DBBBE0232AEBD74F006E2BB3 /* NewsView.swift */,
+				DBBBE0252AEC6A62006E2BB3 /* SettingsView.swift */,
 				DB28ED7A2ADC22DC000094AF /* TimetableView.swift */,
 				DB9265A52AEBC767001A6BE5 /* EventView.swift */,
 				DB820A412AD687730014F26B /* MSALAuthentication.swift */,
@@ -281,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBBBE0262AEC6A62006E2BB3 /* SettingsView.swift in Sources */,
 				DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */,
 				DBCBE5F42AD5E85F000B58E7 /* ContentView.swift in Sources */,
 				DB28ED7B2ADC22DC000094AF /* TimetableView.swift in Sources */,

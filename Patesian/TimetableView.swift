@@ -22,6 +22,11 @@ extension Color {
     static var patesRedAlt: Color {Color(red: 0.86, green: 0.03, blue: 0.08)}
 }
 
+class loginSettings: ObservableObject {
+    @Published var isAuthenticated = false
+    @Published var sortedData = [[Date: [schoolEvent]]]()
+}
+
 struct schoolEvent: Hashable {
     var subject: String
     var teacher: String
@@ -51,8 +56,8 @@ struct graphResponse: Codable {
 }
 
 struct TimetableView: View {
-    @State private var isAuthenticated = false
-    @State private var graphResult = ""
+    @EnvironmentObject var settings: loginSettings
+    @State public var graphResult = ""
     @State private var accessTokenSource = ""
     @State private var showingAlert = false
     @State var currentResponse: graphResponse? = nil
@@ -61,7 +66,7 @@ struct TimetableView: View {
     @State var sortedDict = [[Date : [[String : String]]].Element]()
     @State var sortbruh = [[Date : [[String : String]]]]()
     @State var listView = false
-    @State var sortedData = [[Date: [schoolEvent]]]()
+    //@State var sortedData = [[Date: [schoolEvent]]]()
     
     func fixesEverything1(trash: [[Date: [schoolEvent]].Element]) ->  [[Date: [schoolEvent]]] {
         var surt = [[Date: [schoolEvent]]]()
@@ -95,8 +100,9 @@ struct TimetableView: View {
             
             
             if (isTokenCached != nil) && (expiresOn != nil)  {
-                isAuthenticated = true
-                print("Auth status: \(isAuthenticated)")
+                settings.isAuthenticated = true
+                print(settings.isAuthenticated)
+                print("Auth status: \(settings.isAuthenticated)")
                 //accessTokenSource = "Access Token: \(isTokenCached! ? "Cached" : "Newly Acquired") ";
                 accessTokenSource = "Access Token: \(isTokenCached! ? "Cached" : "Newly Acquired") Expires: \(expiresOn!)";
                 
@@ -314,8 +320,8 @@ struct TimetableView: View {
         let result = (miseEnPlace1(currentResponse: res)).sorted {
                                         $0.0 < $1.0
                                     }
-        sortedData = fixesEverything1(trash: result)
-        for x in sortedData {
+        settings.sortedData = fixesEverything1(trash: result)
+        for x in settings.sortedData {
             //print(x)
         }
     }
@@ -327,16 +333,6 @@ struct TimetableView: View {
         
         
         VStack {
-            Button("try me") {
-                login()
-                for x in sortedData {
-                    print("\(x.keys.first)")
-                    for y in x[x.keys.first!]! {
-                        print("\(y) \n")
-                    }
-                }
-                
-            }
 //            if !listView {
 //                Button("debug") {
 //                    //                listmaker(currentResponse: currentResponse!)
@@ -364,7 +360,7 @@ struct TimetableView: View {
             
             
             List {
-                ForEach(sortedData, id: \.self) { x in
+                ForEach(settings.sortedData, id: \.self) { x in
                     Section(dateformat(date: x.keys.first!)) {
                         ForEach(x[x.keys.first!]!, id: \.self) { eventObject in
                             HStack {
@@ -423,40 +419,40 @@ struct TimetableView: View {
                     }
                 }
             }
-//            .listStyle(.plain)
-//                .navigationTitle("Timetable")
-//                .toolbar {
-//                    ToolbarItem(placement: .automatic) {
-//                        Button {
-//                            listView.toggle()
-//                            let result = (miseEnPlace1(currentResponse: currentResponse!)).sorted {
-//                                $0.0 < $1.0
-//                            }
-//                            //print(miseEnPlace1(currentResponse: currentResponse!))
-//                            //print(result)
-//                            print(fixesEverything1(trash: result))
-//                            
-//                            sortedData = fixesEverything1(trash: result)
-//                            
-//                            //print(sortbruh)
-//                        } label: {
-//                            
-//                            // your button label here
-//                            if listView {
-//                                Image(systemName: "calendar")
-//                            }
-//                            else {
-//                                Image(systemName: "calendar.day.timeline.left")
-//                            }
-//
-//
-//                        }
-//                    }
-//
-//                }
-//                .refreshable {
-//                    print("Refreshing")
-//                }
+            .listStyle(.plain)
+                .navigationTitle("Timetable")
+                .toolbar {
+                    ToolbarItem(placement: .automatic) {
+                        Button {
+                            listView.toggle()
+                            print(settings.isAuthenticated)
+                        } label: {
+                            
+                            // your button label here
+                            if listView {
+                                Image(systemName: "calendar")
+                            }
+                            else {
+                                Image(systemName: "calendar.day.timeline.left")
+                            }
+
+
+                        }
+                    }
+
+                }
+                .refreshable {
+                    print("Refreshing")
+                }
+                .onAppear() {
+                    login()
+                    for x in settings.sortedData {
+                        print("\(x.keys.first)")
+                        for y in x[x.keys.first!]! {
+                            print("\(y) \n")
+                        }
+                    }
+                }
 //                .onAppear() {
 //                    login()
 //                    //part2()

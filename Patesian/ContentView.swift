@@ -28,7 +28,7 @@ struct MapView: View {
     }
 }
 
-struct SettingsView: View {
+struct SettingsView1: View {
     var body: some View {
         Text("Websites")
     }
@@ -39,6 +39,7 @@ struct SettingsView: View {
 
 
 struct ContentView: View {
+    @StateObject var settings = loginSettings()
     var body: some View {
         TabView {
             NavigationStack {
@@ -55,7 +56,10 @@ struct ContentView: View {
                 TimetableView()
                 .navigationTitle("Timetable")
                 
-            }.tabItem {
+                
+            }
+            .environmentObject(settings)
+            .tabItem {
                 Label("Timetable", systemImage: "calendar")
             }
             
@@ -81,6 +85,7 @@ struct ContentView: View {
             NavigationStack {
                 SettingsView()
             }
+            .environmentObject(settings)
             
                 .tabItem {
                     Label("Settings", systemImage: "gear")
