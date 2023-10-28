@@ -66,29 +66,15 @@ struct TimetableView: View {
     @State var hurray = [Date : [[String : String]]]()
     @State var sortedDict = [[Date : [[String : String]]].Element]()
     @State var listView = false
-    
-    func fixesEverything1(trash: [[Date: [schoolEvent]].Element]) ->  [[Date: [schoolEvent]]] {
-        var surt = [[Date: [schoolEvent]]]()
-        for x in trash {
-            surt.append([x.key : x.value])
-        }
-        return surt
-    }
+
     
     func stripDate(input: Date) -> Date {
         let strippedDate = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: input))
         return strippedDate!
     }
     
-    func listmaker(currentResponse: graphResponse) {
-        var array = [[String : Any]]()
-        for x in Array(currentResponse.value) {
-            let dict: [String : Any] = ["subject" : x.subject, "body" : x.bodyPreview, "start" : x.start.dateTime, "end" : x.end.dateTime, "location" : x.location.displayName]
-            array.append(dict)
-        }
-    }
     
-    func login()   {
+    func login() {
             MSALAuthentication.signin(completion: { securityToken, isTokenCached, expiresOn in
                 if (isTokenCached != nil) && (expiresOn != nil)  {
                     DispatchQueue.main.async {
@@ -105,6 +91,7 @@ struct TimetableView: View {
                     request.httpMethod = "GET"
                     request.addValue("Bearer \(securityToken!)", forHTTPHeaderField: "Authorization")
                     
+                    
                     URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
                         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, error == nil else {
                             //print(error!.localizedDescription)
@@ -119,8 +106,8 @@ struct TimetableView: View {
                             DispatchQueue.main.async {
                                 settings.jsonRaw = jsonData
                             }
-                            return
-                            //jsonParser(json: jsonData)
+                            jsonParser(json: jsonData)
+                            print(jsonData)
                         } else {
                             print("An error has ocurred")
                         }
@@ -170,7 +157,7 @@ struct TimetableView: View {
     //https://graph.microsoft.com/v1.0/me/calendarview?startdatetime=2023-12-20T07:51:29.223Z&enddatetime=2024-12-27T07:51:29.223Z&$select=subject,bodyPreview,start,end,location&$top=2000
     
     
-    func jsonParser(json: Data) {
+    func jsonParser(json: Data) -> [[Date: [schoolEvent]]]{
         let data = json
         //print(json)
         let dateFormatter = DateFormatter()
@@ -180,10 +167,26 @@ struct TimetableView: View {
         decoder.dateDecodingStrategy = .formatted(dateFormatter)
         do {
             currentResponse = try decoder.decode(graphResponse.self, from: data)
-            funk(res: currentResponse!)
+            let result = (dictionaryInit(currentResponse: currentResponse!)).sorted {
+                                            $0.0 < $1.0
+                                        }
+            var surt = [[Date: [schoolEvent]]]()
+            for x in result {
+                surt.append([x.key : x.value])
+                
+            }
+            
+            DispatchQueue.main.async {
+                settings.sortedData = surt
+            }
+            
+            
+            return surt
         } catch {
             print(String(describing: error))
+            return ([[Date.now : [schoolEvent(subject: "", teacher: "", location: "", start: Date.now, end: Date.now)]]])
         }
+        
     }
     
     func subjectGet(raw: String) -> String {
@@ -194,8 +197,6 @@ struct TimetableView: View {
 
                 let subjectEnd = str.range(of: " - ")!.lowerBound
                 let subjectStart = str.startIndex
-
-                let teacherRange = teacherStart..<teacherEnd
                 let subjectRange = subjectStart..<subjectEnd
 
                 let subjectSubstring = str[subjectRange]  // play
@@ -218,7 +219,6 @@ struct TimetableView: View {
                 let subjectStart = str.startIndex
 
                 let teacherRange = teacherStart..<teacherEnd
-                let subjectRange = subjectStart..<subjectEnd
 
                 let teacherSubString = str[teacherRange]  // play
                 
@@ -242,7 +242,7 @@ struct TimetableView: View {
         return(formatter1.string(from: date))
     }
 
-    func miseEnPlace1(currentResponse: graphResponse) -> [Date : [schoolEvent]] {
+    func dictionaryInit(currentResponse: graphResponse) -> [Date : [schoolEvent]] {
         var dictionaryStruct = [Date : [schoolEvent]]()
         for x in Array(currentResponse.value) {
             if dictionaryStruct[stripDate(input: x.start.dateTime)] == nil {
@@ -254,15 +254,6 @@ struct TimetableView: View {
             
         }
         return dictionaryStruct
-    }
-    
-    func funk(res: graphResponse) {
-        let result = (miseEnPlace1(currentResponse: res)).sorted {
-                                        $0.0 < $1.0
-                                    }
-        DispatchQueue.main.async {
-            settings.sortedData = fixesEverything1(trash: result)
-        }
     }
     
     
@@ -357,7 +348,7 @@ struct TimetableView: View {
 
                 .onAppear() {
                         login()
-                        print(settings.jsonRaw)
+                        //print(settings.jsonRaw)
                         //jsonParser(json: settings.jsonRaw)
                     
                     
