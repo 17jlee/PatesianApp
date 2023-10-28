@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Foundation
-import Combine
 
 extension Color {
     static var patesRed: Color { Color(red: 0.78, green: 0.06, blue: 0.23) }
@@ -18,6 +17,7 @@ extension Color {
     @Published var isAuthenticated = false
     @Published var sortedData = [[Date: [schoolEvent]]]()
     @Published var graphResult = ""
+    @Published var jsonRaw = Data()
     
     init(previewing: Bool = false) {
             if previewing {
@@ -65,24 +65,12 @@ struct TimetableView: View {
     @State var graphText = ""
     @State var hurray = [Date : [[String : String]]]()
     @State var sortedDict = [[Date : [[String : String]]].Element]()
-    @State var sortbruh = [[Date : [[String : String]]]]()
     @State var listView = false
-    //@State var sortedData = [[Date: [schoolEvent]]]()
     
     func fixesEverything1(trash: [[Date: [schoolEvent]].Element]) ->  [[Date: [schoolEvent]]] {
         var surt = [[Date: [schoolEvent]]]()
         for x in trash {
-            //let dateNow = x.key
             surt.append([x.key : x.value])
-        }
-        return surt
-    }
-    
-    func fixesEverything(trash: [[Date : [[String : String]]].Element]) ->  [[Date : [[String : String]]]] {
-        var surt = [[Date : [[String : String]]]]()
-        for x in trash {
-            let dateNow = x.key
-            surt.append([dateNow : x.value])
         }
         return surt
     }
@@ -100,60 +88,55 @@ struct TimetableView: View {
         }
     }
     
- func login()  {
-        MSALAuthentication.signin(completion: { securityToken, isTokenCached, expiresOn in
-            
-            
-            if (isTokenCached != nil) && (expiresOn != nil)  {
-                DispatchQueue.main.async {
-                    settings.isAuthenticated = true
-                }
-                
-                //print(settings.isAuthenticated)
-                //print("Auth status: \(settings.isAuthenticated)")
-                //accessTokenSource = "Access Token: \(isTokenCached! ? "Cached" : "Newly Acquired") ";
-                accessTokenSource = "Access Token: \(isTokenCached! ? "Cached" : "Newly Acquired") Expires: \(expiresOn!)";
-                
-                guard let meUrl = URL(string: URLString()) else {
-                    return
-                }
-
-                var request = URLRequest(url: meUrl)
-                
-                request.httpMethod = "GET"
-                request.addValue("Bearer \(securityToken!)", forHTTPHeaderField: "Authorization")
-
-                URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-                    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, error == nil else {
-                        //print(error!.localizedDescription)
+    func login()   {
+            MSALAuthentication.signin(completion: { securityToken, isTokenCached, expiresOn in
+                if (isTokenCached != nil) && (expiresOn != nil)  {
+                    DispatchQueue.main.async {
+                        settings.isAuthenticated = true
+                    }
+                    accessTokenSource = "Access Token: \(isTokenCached! ? "Cached" : "Newly Acquired") Expires: \(expiresOn!)";
+                    
+                    guard let meUrl = URL(string: URLString()) else {
                         return
                     }
-
-                    if let json = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers),
-                       let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
-                        DispatchQueue.main.async {
-                            settings.graphResult = String(decoding: jsonData, as: UTF8.self)
+                    
+                    var request = URLRequest(url: meUrl)
+                    
+                    request.httpMethod = "GET"
+                    request.addValue("Bearer \(securityToken!)", forHTTPHeaderField: "Authorization")
+                    
+                    URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+                        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, error == nil else {
+                            //print(error!.localizedDescription)
+                            return
                         }
                         
-                        //print(type(of: jsonData))
-                        jsonParser(json: jsonData)
-                        //print(json)
-                        //print("hoere")
-                    } else {
-                        print("An error has ocurred")
-                    }
-                }).resume()
-            }
-            else {
-                showingAlert = true
-            }
-            
-        })
-    }
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers),
+                           let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
+                            DispatchQueue.main.async {
+                                settings.graphResult = String(decoding: jsonData, as: UTF8.self)
+                            }
+                            DispatchQueue.main.async {
+                                settings.jsonRaw = jsonData
+                            }
+                            return
+                            //jsonParser(json: jsonData)
+                        } else {
+                            print("An error has ocurred")
+                        }
+                    }).resume()
+                }
+                else {
+                    showingAlert = true
+                }
+                
+            })
+        }
+    
     
     func period(start: Date, end: Date) -> String {
-        let combine = (timeformat(date: start), timeformat(date: end))
-        switch combine {
+        let combined = (timeformat(date: start), timeformat(date: end))
+        switch combined {
         case("08:40", "08:55") :
             return("AM Registration")
         case("09:00", "10:00") :
@@ -169,7 +152,7 @@ struct TimetableView: View {
         default :
             return("")
         
-    }
+        }
     }
     
     func URLString() -> String {
@@ -178,7 +161,6 @@ struct TimetableView: View {
         URL.append("&enddatetime=")
         //let delta = Calendar.current.date(byAdding: .yearForWeekOfYear, value: 1, to: Date())
         let delta = Calendar.current.date(byAdding: .weekOfYear, value: 3, to: Date())
-        print (delta)
         let deltaString = ISO8601DateFormatter().string(from: delta!)
         URL.append(deltaString)
         URL.append("&$top=2000")
@@ -198,28 +180,13 @@ struct TimetableView: View {
         decoder.dateDecodingStrategy = .formatted(dateFormatter)
         do {
             currentResponse = try decoder.decode(graphResponse.self, from: data)
-            part2(current: (try decoder.decode(graphResponse.self, from: data)))
-            miseEnPlace1(currentResponse: try decoder.decode(graphResponse.self, from: data))
             funk(res: currentResponse!)
-            //graphText = stringCreator(raw: currentResponse!)
         } catch {
             print(String(describing: error))
         }
     }
     
-    func part2(current : graphResponse) {
-        hurray = miseEnPlace(currentResponse: current)
-        let result = hurray.sorted {
-            $0.0 < $1.0
-        }
-        
-        //print(Array(result)[0])
-        //print(type(of: Array(result)[0]))
-        sortbruh = fixesEverything(trash: result)
-    }
-    
     func subjectGet(raw: String) -> String {
-        var graphString = ""
             if raw.contains(" - ") {
                 let str = raw
                 let teacherStart = str.range(of: " - ")!.upperBound
@@ -231,7 +198,6 @@ struct TimetableView: View {
                 let teacherRange = teacherStart..<teacherEnd
                 let subjectRange = subjectStart..<subjectEnd
 
-                let teacherSubString = str[teacherRange]  // play
                 let subjectSubstring = str[subjectRange]  // play
                 
                 return String(subjectSubstring)
@@ -243,7 +209,6 @@ struct TimetableView: View {
     }
     
     func teacherGet(raw: String) -> String {
-        var graphString = ""
             if raw.contains(" - ") {
                 let str = raw
                 let teacherStart = str.range(of: " - ")!.upperBound
@@ -256,7 +221,6 @@ struct TimetableView: View {
                 let subjectRange = subjectStart..<subjectEnd
 
                 let teacherSubString = str[teacherRange]  // play
-                let subjectSubstring = str[subjectRange]  // play
                 
                 return String(teacherSubString)
             
@@ -277,37 +241,6 @@ struct TimetableView: View {
         formatter1.dateFormat = "EEEE, d MMMM y"
         return(formatter1.string(from: date))
     }
-    
-    func converter(data: [[Date : [[String : String]]]]) -> [Date: [schoolEvent]] {
-//        print("bruh")
-        var output = [Date: [schoolEvent]]()
-//        print(data.)
-        for x in data {
-            //print("\(x.keys[x.keys.startIndex])")
-            var objectList = [schoolEvent]()
-            for y in x.values.first! {
-                //print("\(y) \n")
-                //objectList.append(schoolEvent(subject: y["subject"]!, teacher: y["teacher"]!, location: y["location"]!, start: y["start"]!, end: y["end"]!))
-            }
-            //print(x.values)
-//            print("keys")
-        }
-        return ([Date.now : [schoolEvent(subject: "", teacher: "", location: "", start: Date.now, end: Date.now)]])
-    }
-    
-    func miseEnPlace(currentResponse: graphResponse) -> [Date : [[String : String]]] {
-        var dictionaryStruct = [Date : [[String : String]]]()
-        for x in Array(currentResponse.value) {
-            if dictionaryStruct[stripDate(input: x.start.dateTime)] == nil {
-                dictionaryStruct[stripDate(input: x.start.dateTime)] = [["subject" : subjectGet(raw: x.subject), "teacher": teacherGet(raw: x.subject),"start" : timeformat(date: x.start.dateTime), "end" : timeformat(date: x.end.dateTime), "location" : subjectGet(raw: x.location.displayName)]]
-            }
-            else {
-                dictionaryStruct[stripDate(input: x.start.dateTime)]!.append(["subject" : subjectGet(raw: x.subject), "teacher": teacherGet(raw: x.subject),"start" : timeformat(date: x.start.dateTime), "end" : timeformat(date: x.end.dateTime), "location" : subjectGet(raw: x.location.displayName)])
-            }
-            
-        }
-        return dictionaryStruct
-    }
 
     func miseEnPlace1(currentResponse: graphResponse) -> [Date : [schoolEvent]] {
         var dictionaryStruct = [Date : [schoolEvent]]()
@@ -320,7 +253,6 @@ struct TimetableView: View {
             }
             
         }
-        //print("\(dictionaryStruct) \n")
         return dictionaryStruct
     }
     
@@ -331,18 +263,11 @@ struct TimetableView: View {
         DispatchQueue.main.async {
             settings.sortedData = fixesEverything1(trash: result)
         }
-        
-        for x in settings.sortedData {
-            //print(x)
-        }
     }
     
     
     
     var body: some View {
-
-        
-        
         VStack {
             List {
                 ForEach(settings.sortedData, id: \.self) { x in
@@ -364,10 +289,9 @@ struct TimetableView: View {
                                         if String(eventObject.location) == "" && String(eventObject.teacher) == "" {
                                             Text("")
                                                 .padding(.bottom, 3)
-                                            //Spacer()
                                         }
                                         else if String(eventObject.location) == "" {
-                                            Text("\(eventObject.teacher))")
+                                            Text("\(eventObject.teacher)")
                                                 .font(Font.headline.weight(.light))
                                         }
                                         else {
@@ -405,35 +329,38 @@ struct TimetableView: View {
                     ToolbarItem(placement: .automatic) {
                         Button {
                             listView.toggle()
-                            //print(settings.isAuthenticated)
+                            print(settings.jsonRaw)
                         } label: {
-                            
-                            // your button label here
                             if listView {
                                 Image(systemName: "calendar")
                             }
                             else {
                                 Image(systemName: "calendar.day.timeline.left")
                             }
-
-
                         }
                     }
 
                 }
+                .alert(isPresented: $showingAlert) {
+                            Alert(title: Text("Error"), message: Text("Unable to authenticate"), dismissButton: .default(Text("OK")))
+                        }
                 .refreshable {
                     print("Refreshing")
                 }
+//                }.task {
+//                    do {
+//                        try await login()
+//                        print(settings.jsonRaw)
+//                    } catch {
+//                        print("error")
+//                    }
+
                 .onAppear() {
-
-                    login()
-
-                    for x in settings.sortedData {
-                        print("\(x.keys.first)")
-                        for y in x[x.keys.first!]! {
-                            print("\(y) \n")
-                        }
-                    }
+                        login()
+                        print(settings.jsonRaw)
+                        //jsonParser(json: settings.jsonRaw)
+                    
+                    
                 }
         }
         
