@@ -14,8 +14,8 @@
             filePath = "Patesian/TimetableView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
             landmarkName = "URLString()"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,10 +30,200 @@
             filePath = "Patesian/TimetableView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "URLString()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F6054B6A-649C-4D2A-8950-FEC9265DE379"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Patesian/TimetableView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "login()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F6054B6A-649C-4D2A-8950-FEC9265DE379 - ca7024006b9a02b0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor @Sendable () -&gt; () in closure #1 (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Swift.Bool&gt;, Swift.Optional&lt;Foundation.Date&gt;) -&gt; () in Patesian.TimetableView.login() -&gt; ()"
+                  moduleName = "Patesian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jiminlee/Library/Mobile%20Documents/com~apple~CloudDocs/projectMarauder/Patesian/Patesian/TimetableView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "F6054B6A-649C-4D2A-8950-FEC9265DE379 - da7f69b7ae465402"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Swift.Bool&gt;, Swift.Optional&lt;Foundation.Date&gt;) -&gt; () in Patesian.TimetableView.login() -&gt; ()"
+                  moduleName = "Patesian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jiminlee/Library/Mobile%20Documents/com~apple~CloudDocs/projectMarauder/Patesian/Patesian/TimetableView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110"
+                  offsetFromSymbolStart = "1020">
+               </Location>
+               <Location
+                  uuid = "F6054B6A-649C-4D2A-8950-FEC9265DE379 - e77a4862a4400fec"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Swift.Bool&gt;, Swift.Optional&lt;Foundation.Date&gt;) -&gt; () in Patesian.TimetableView.login() -&gt; ()"
+                  moduleName = "Patesian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jiminlee/Library/Mobile%20Documents/com~apple~CloudDocs/projectMarauder/Patesian/Patesian/TimetableView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "003A707E-6548-4025-95D0-3AEE20D3CDFD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Patesian/TimetableView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "login()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "04E6799C-A7A0-49CA-9A84-BA7A771E229E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Patesian/TimetableView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "login()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "04E6799C-A7A0-49CA-9A84-BA7A771E229E - a2fb66fe1906d994"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Swift.Bool&gt;, Swift.Optional&lt;Foundation.Date&gt;) -&gt; () in Patesian.TimetableView.login() -&gt; ()"
+                  moduleName = "Patesian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jiminlee/Library/Mobile%20Documents/com~apple~CloudDocs/projectMarauder/Patesian/Patesian/TimetableView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "2060">
+               </Location>
+               <Location
+                  uuid = "04E6799C-A7A0-49CA-9A84-BA7A771E229E - 5f135198cea62012"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #2 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Swift.Bool&gt;, Swift.Optional&lt;Foundation.Date&gt;) -&gt; () in Patesian.TimetableView.login() -&gt; ()"
+                  moduleName = "Patesian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jiminlee/Library/Mobile%20Documents/com~apple~CloudDocs/projectMarauder/Patesian/Patesian/TimetableView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "136"
+                  endingLineNumber = "136"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BAC8CCA5-77D7-463A-BD55-00B261CE89BD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Patesian/TimetableView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "334"
+            endingLineNumber = "334"
+            landmarkName = "funk(res:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BAC8CCA5-77D7-463A-BD55-00B261CE89BD - 8c5b738f56db0804"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Patesian.TimetableView.funk(res: Patesian.graphResponse) -&gt; ()"
+                  moduleName = "Patesian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jiminlee/Library/Mobile%20Documents/com~apple~CloudDocs/projectMarauder/Patesian/Patesian/TimetableView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "335"
+                  endingLineNumber = "335"
+                  offsetFromSymbolStart = "452">
+               </Location>
+               <Location
+                  uuid = "BAC8CCA5-77D7-463A-BD55-00B261CE89BD - 8c5b738f56db0823"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Patesian.TimetableView.funk(res: Patesian.graphResponse) -&gt; ()"
+                  moduleName = "Patesian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jiminlee/Library/Mobile%20Documents/com~apple~CloudDocs/projectMarauder/Patesian/Patesian/TimetableView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "336"
+                  endingLineNumber = "336"
+                  offsetFromSymbolStart = "756">
+               </Location>
+               <Location
+                  uuid = "BAC8CCA5-77D7-463A-BD55-00B261CE89BD - 8c5b738f56db0823"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Patesian.TimetableView.funk(res: Patesian.graphResponse) -&gt; ()"
+                  moduleName = "Patesian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jiminlee/Library/Mobile%20Documents/com~apple~CloudDocs/projectMarauder/Patesian/Patesian/TimetableView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "336"
+                  endingLineNumber = "336"
+                  offsetFromSymbolStart = "988">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

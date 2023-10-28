@@ -44,13 +44,10 @@ struct ContentView: View {
         TabView {
             NavigationStack {
                 MapView()
-                    //.navigationTitle("Home+33")
             }
             .tabItem {
                 Label("Map", systemImage: "map")
             }
-
-            //Text("Timetable")
             
             NavigationStack {
                 TimetableView()
@@ -96,7 +93,11 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+   // @StateObject var settings = loginSettings()
   static var previews: some View {
     ContentView()
+          .environmentObject(loginSettings(previewing: true))
+      
   }
+    
 }

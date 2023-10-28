@@ -17,8 +17,6 @@ struct SettingsView: View {
                         settings.isAuthenticated = false
                         settings.graphResult = ""
                         settings.sortedData = [[Date: [schoolEvent]]]()
-    //                    TimetableView.graphText = ""
-    //                    TimetableView.graphResult = ""
                     }
                 }
             }

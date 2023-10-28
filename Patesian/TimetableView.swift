@@ -7,16 +7,25 @@
 
 import SwiftUI
 import Foundation
+import Combine
 
 extension Color {
     static var patesRed: Color { Color(red: 0.78, green: 0.06, blue: 0.23) }
     static var patesRedAlt: Color {Color(red: 0.86, green: 0.03, blue: 0.08)}
 }
 
-class loginSettings: ObservableObject {
+@MainActor class loginSettings: ObservableObject {
     @Published var isAuthenticated = false
     @Published var sortedData = [[Date: [schoolEvent]]]()
     @Published var graphResult = ""
+    
+    init(previewing: Bool = false) {
+            if previewing {
+                var sortedData = [[Date: [schoolEvent]]]()
+                var graphResult = ""
+            }
+        }
+
 }
 
 struct schoolEvent: Hashable {
@@ -91,14 +100,17 @@ struct TimetableView: View {
         }
     }
     
-    func login() {
+ func login()  {
         MSALAuthentication.signin(completion: { securityToken, isTokenCached, expiresOn in
             
             
             if (isTokenCached != nil) && (expiresOn != nil)  {
-                settings.isAuthenticated = true
-                print(settings.isAuthenticated)
-                print("Auth status: \(settings.isAuthenticated)")
+                DispatchQueue.main.async {
+                    settings.isAuthenticated = true
+                }
+                
+                //print(settings.isAuthenticated)
+                //print("Auth status: \(settings.isAuthenticated)")
                 //accessTokenSource = "Access Token: \(isTokenCached! ? "Cached" : "Newly Acquired") ";
                 accessTokenSource = "Access Token: \(isTokenCached! ? "Cached" : "Newly Acquired") Expires: \(expiresOn!)";
                 
@@ -119,7 +131,10 @@ struct TimetableView: View {
 
                     if let json = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers),
                        let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
-                        settings.graphResult = String(decoding: jsonData, as: UTF8.self)
+                        DispatchQueue.main.async {
+                            settings.graphResult = String(decoding: jsonData, as: UTF8.self)
+                        }
+                        
                         //print(type(of: jsonData))
                         jsonParser(json: jsonData)
                         //print(json)
@@ -313,7 +328,10 @@ struct TimetableView: View {
         let result = (miseEnPlace1(currentResponse: res)).sorted {
                                         $0.0 < $1.0
                                     }
-        settings.sortedData = fixesEverything1(trash: result)
+        DispatchQueue.main.async {
+            settings.sortedData = fixesEverything1(trash: result)
+        }
+        
         for x in settings.sortedData {
             //print(x)
         }
@@ -387,7 +405,7 @@ struct TimetableView: View {
                     ToolbarItem(placement: .automatic) {
                         Button {
                             listView.toggle()
-                            print(settings.isAuthenticated)
+                            //print(settings.isAuthenticated)
                         } label: {
                             
                             // your button label here
@@ -407,7 +425,9 @@ struct TimetableView: View {
                     print("Refreshing")
                 }
                 .onAppear() {
+
                     login()
+
                     for x in settings.sortedData {
                         print("\(x.keys.first)")
                         for y in x[x.keys.first!]! {
@@ -423,5 +443,6 @@ struct TimetableView: View {
 struct TimetableView_Previews: PreviewProvider {
   static var previews: some View {
     TimetableView()
+          .environmentObject(loginSettings(previewing: true))
   }
 }

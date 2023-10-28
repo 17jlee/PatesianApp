@@ -17,10 +17,6 @@ struct NewsView: View {
                 Text("Aabha loses another scrunchie???")
                 Text("Jimin Fails Physics in Mocks!?!")
             }
-            Button("bruh") {
-                let huh = schoolEvent(subject: "ass", teacher: "teach", location: "ya", start: Date.now, end: Date.now)
-                print(huh)
-            }
         }
     }
 }
