@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB0839012AEDA3D0001CE54C /* cachedData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB0838FF2AEDA3D0001CE54C /* cachedData.xcdatamodeld */; };
 		DB28ED7B2ADC22DC000094AF /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28ED7A2ADC22DC000094AF /* TimetableView.swift */; };
 		DB820A3E2AD686D20014F26B /* MSAL in Frameworks */ = {isa = PBXBuildFile; productRef = DB820A3D2AD686D20014F26B /* MSAL */; };
 		DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB820A412AD687730014F26B /* MSALAuthentication.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB0839002AEDA3D0001CE54C /* cachedData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = cachedData.xcdatamodel; sourceTree = "<group>"; };
 		DB28ED7A2ADC22DC000094AF /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
 		DB28ED7C2ADC283F000094AF /* Patesian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Patesian.entitlements; sourceTree = "<group>"; };
 		DB28ED7D2ADC28A9000094AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 		DBCBE5E52AD5E85F000B58E7 = {
 			isa = PBXGroup;
 			children = (
+				DB0838FF2AEDA3D0001CE54C /* cachedData.xcdatamodeld */,
 				DBCBE5F02AD5E85F000B58E7 /* Patesian */,
 				DBCBE6012AD5E861000B58E7 /* PatesianTests */,
 				DBCBE60B2AD5E861000B58E7 /* PatesianUITests */,
@@ -285,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBBBE0262AEC6A62006E2BB3 /* SettingsView.swift in Sources */,
+				DB0839012AEDA3D0001CE54C /* cachedData.xcdatamodeld in Sources */,
 				DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */,
 				DBCBE5F42AD5E85F000B58E7 /* ContentView.swift in Sources */,
 				DB28ED7B2ADC22DC000094AF /* TimetableView.swift in Sources */,
@@ -643,6 +647,19 @@
 			productName = MSAL;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		DB0838FF2AEDA3D0001CE54C /* cachedData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DB0839002AEDA3D0001CE54C /* cachedData.xcdatamodel */,
+			);
+			currentVersion = DB0839002AEDA3D0001CE54C /* cachedData.xcdatamodel */;
+			path = cachedData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DBCBE5E62AD5E85F000B58E7 /* Project object */;
 }
