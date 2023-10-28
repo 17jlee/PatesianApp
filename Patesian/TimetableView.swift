@@ -8,15 +8,6 @@
 import SwiftUI
 import Foundation
 
-extension Date {
-    public var removeTimeStamp : Date? {
-       guard let date = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: self)) else {
-        return nil
-       }
-       return date
-   }
-}
-
 extension Color {
     static var patesRed: Color { Color(red: 0.78, green: 0.06, blue: 0.23) }
     static var patesRedAlt: Color {Color(red: 0.86, green: 0.03, blue: 0.08)}
@@ -25,6 +16,7 @@ extension Color {
 class loginSettings: ObservableObject {
     @Published var isAuthenticated = false
     @Published var sortedData = [[Date: [schoolEvent]]]()
+    @Published var graphResult = ""
 }
 
 struct schoolEvent: Hashable {
@@ -86,6 +78,11 @@ struct TimetableView: View {
         return surt
     }
     
+    func stripDate(input: Date) -> Date {
+        let strippedDate = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: input))
+        return strippedDate!
+    }
+    
     func listmaker(currentResponse: graphResponse) {
         var array = [[String : Any]]()
         for x in Array(currentResponse.value) {
@@ -95,7 +92,6 @@ struct TimetableView: View {
     }
     
     func login() {
-        graphText = ""
         MSALAuthentication.signin(completion: { securityToken, isTokenCached, expiresOn in
             
             
@@ -123,7 +119,7 @@ struct TimetableView: View {
 
                     if let json = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers),
                        let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
-                        graphResult = String(decoding: jsonData, as: UTF8.self)
+                        settings.graphResult = String(decoding: jsonData, as: UTF8.self)
                         //print(type(of: jsonData))
                         jsonParser(json: jsonData)
                         //print(json)
@@ -287,11 +283,11 @@ struct TimetableView: View {
     func miseEnPlace(currentResponse: graphResponse) -> [Date : [[String : String]]] {
         var dictionaryStruct = [Date : [[String : String]]]()
         for x in Array(currentResponse.value) {
-            if dictionaryStruct[x.start.dateTime.removeTimeStamp!] == nil {
-                dictionaryStruct[x.start.dateTime.removeTimeStamp!] = [["subject" : subjectGet(raw: x.subject), "teacher": teacherGet(raw: x.subject),"start" : timeformat(date: x.start.dateTime), "end" : timeformat(date: x.end.dateTime), "location" : subjectGet(raw: x.location.displayName)]]
+            if dictionaryStruct[stripDate(input: x.start.dateTime)] == nil {
+                dictionaryStruct[stripDate(input: x.start.dateTime)] = [["subject" : subjectGet(raw: x.subject), "teacher": teacherGet(raw: x.subject),"start" : timeformat(date: x.start.dateTime), "end" : timeformat(date: x.end.dateTime), "location" : subjectGet(raw: x.location.displayName)]]
             }
             else {
-                dictionaryStruct[x.start.dateTime.removeTimeStamp!]!.append(["subject" : subjectGet(raw: x.subject), "teacher": teacherGet(raw: x.subject),"start" : timeformat(date: x.start.dateTime), "end" : timeformat(date: x.end.dateTime), "location" : subjectGet(raw: x.location.displayName)])
+                dictionaryStruct[stripDate(input: x.start.dateTime)]!.append(["subject" : subjectGet(raw: x.subject), "teacher": teacherGet(raw: x.subject),"start" : timeformat(date: x.start.dateTime), "end" : timeformat(date: x.end.dateTime), "location" : subjectGet(raw: x.location.displayName)])
             }
             
         }
@@ -301,15 +297,12 @@ struct TimetableView: View {
     func miseEnPlace1(currentResponse: graphResponse) -> [Date : [schoolEvent]] {
         var dictionaryStruct = [Date : [schoolEvent]]()
         for x in Array(currentResponse.value) {
-            if dictionaryStruct[x.start.dateTime.removeTimeStamp!] == nil {
-                dictionaryStruct[x.start.dateTime.removeTimeStamp!] = [schoolEvent(subject: subjectGet(raw: x.subject), teacher: teacherGet(raw: x.subject), location: subjectGet(raw: x.location.displayName), start: x.start.dateTime, end: x.end.dateTime)]
+            if dictionaryStruct[stripDate(input: x.start.dateTime)] == nil {
+                dictionaryStruct[stripDate(input: x.start.dateTime)] = [schoolEvent(subject: subjectGet(raw: x.subject), teacher: teacherGet(raw: x.subject), location: subjectGet(raw: x.location.displayName), start: x.start.dateTime, end: x.end.dateTime)]
             }
             else {
-                dictionaryStruct[x.start.dateTime.removeTimeStamp!]!.append(schoolEvent(subject: subjectGet(raw: x.subject), teacher: teacherGet(raw: x.subject), location: subjectGet(raw: x.location.displayName), start: x.start.dateTime, end: x.end.dateTime))
+                dictionaryStruct[stripDate(input: x.start.dateTime)]!.append(schoolEvent(subject: subjectGet(raw: x.subject), teacher: teacherGet(raw: x.subject), location: subjectGet(raw: x.location.displayName), start: x.start.dateTime, end: x.end.dateTime))
             }
-//            for z in dictionaryStruct.keys {
-//                dictionaryStruct[z]?.append(schoolEvent(subject: "Lunch", teacher: "", location: "", start: Date.now, end: Date.now))
-//            }
             
         }
         //print("\(dictionaryStruct) \n")
@@ -333,32 +326,6 @@ struct TimetableView: View {
         
         
         VStack {
-//            if !listView {
-//                Button("debug") {
-//                    //                listmaker(currentResponse: currentResponse!)
-//                    //                print(graphResult)
-//                    //print(miseEnPlace(currentResponse: currentResponse!))
-//                    hurray = miseEnPlace(currentResponse: currentResponse!)
-//                    //hurray = [Date.now : [["bruh" : "huh"]]]
-//                    //print(hurray)
-//                    let result = hurray.sorted {
-//                        $0.0 < $1.0
-//                    }
-//                    
-//                    //print(Array(result)[0])
-//                    //print(type(of: Array(result)[0]))
-//                    sortedDict = result
-//                    print(sortedDict)
-//                    sortbruh = fixesEverything(trash: result)
-//                    
-//                }
-//            }
-//            if !listView {
-//                Text("To use calendar features, you must login with your Pate's ID.")
-//                    .multilineTextAlignment(.center)
-//            }
-            
-            
             List {
                 ForEach(settings.sortedData, id: \.self) { x in
                     Section(dateformat(date: x.keys.first!)) {
@@ -393,11 +360,6 @@ struct TimetableView: View {
                                         Spacer()
                                     }
                                     
-//                                    if String(huh["location"]!) == "" && String(huh["teacher"]!) == "" {
-//                                        //Text("")
-//                                        //Spacer()
-//                                    }
-
                                 }
 
                                 Spacer()
@@ -453,50 +415,6 @@ struct TimetableView: View {
                         }
                     }
                 }
-//                .onAppear() {
-//                    login()
-//                    //part2()
-//                    //print(currentResponse)
-//                    //print(sortbruh)
-//                    converter(data: sortbruh)
-////                    hurray = miseEnPlace(currentResponse: currentResponse!)
-////                    //hurray = [Date.now : [["bruh" : "huh"]]]
-////                    //print(hurray)
-////                    let result = hurray.sorted {
-////                        $0.0 < $1.0
-////                    }
-////                    
-////                    //print(Array(result)[0])
-////                    //print(type(of: Array(result)[0]))
-////                    sortedDict = result
-////                    print(sortedDict)
-////                    sortbruh = fixesEverything(trash: result)
-//                }
-//            
-            
-            
-//            Button("Login") {
-//                login()
-//            }
-//            .alert("Authentication Error", isPresented: $showingAlert) {
-//                        Button("OK", role: .cancel) { }
-//                    }
-//            if !listView {
-//                Button {
-//                    MSALAuthentication.signout() { () in
-//                        isAuthenticated = false
-//                        graphText = ""
-//                        graphResult = ""
-//                    }
-//                } label: {
-//                    Text("Sign Out")
-//                }
-//            }
-//            Button("debug") {
-//                part2()
-//                
-//            }
-            //Text(graphText)
         }
         
     }

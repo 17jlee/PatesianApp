@@ -11,13 +11,11 @@ struct SettingsView: View {
     @EnvironmentObject var settings: loginSettings
     var body: some View {
         List {
-            Button("huh") {
-                print(settings.isAuthenticated)
-            }
             if settings.isAuthenticated {
                 Button("Sign Out") {
                     MSALAuthentication.signout() { () in
                         settings.isAuthenticated = false
+                        settings.graphResult = ""
                         settings.sortedData = [[Date: [schoolEvent]]]()
     //                    TimetableView.graphText = ""
     //                    TimetableView.graphResult = ""
