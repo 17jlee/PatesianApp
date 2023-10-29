@@ -28,6 +28,10 @@ extension Color {
 
 }
 
+public class portableCache: NSObject {
+    var currentCache = [Date : [schoolEvent]]()
+}
+
 struct schoolEvent: Hashable {
     var subject: String
     var teacher: String
@@ -57,6 +61,7 @@ struct graphResponse: Codable {
 }
 
 struct TimetableView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var settings: loginSettings
     @State public var graphResult = ""
     @State private var accessTokenSource = ""
@@ -147,7 +152,7 @@ struct TimetableView: View {
         URL.append(ISO8601DateFormatter().string(from: Date.now))
         URL.append("&enddatetime=")
         //let delta = Calendar.current.date(byAdding: .yearForWeekOfYear, value: 1, to: Date())
-        let delta = Calendar.current.date(byAdding: .weekOfYear, value: 3, to: Date())
+        let delta = Calendar.current.date(byAdding: .year, value: 1, to: Date())
         let deltaString = ISO8601DateFormatter().string(from: delta!)
         URL.append(deltaString)
         URL.append("&$top=2000")
@@ -253,6 +258,11 @@ struct TimetableView: View {
             }
             
         }
+        let cache = Item(context: managedObjectContext)
+        let portabledictionaryStruct = portableCache()
+        portabledictionaryStruct.currentCache = dictionaryStruct
+        cache.savedData = portabledictionaryStruct
+        PersistenceController.shared.save()
         return dictionaryStruct
     }
     
@@ -261,6 +271,7 @@ struct TimetableView: View {
     var body: some View {
         VStack {
             List {
+                
                 ForEach(settings.sortedData, id: \.self) { x in
                     Section(dateformat(date: x.keys.first!)) {
                         ForEach(x[x.keys.first!]!, id: \.self) { eventObject in
@@ -337,6 +348,7 @@ struct TimetableView: View {
                         }
                 .refreshable {
                     print("Refreshing")
+                    login()
                 }
 //                }.task {
 //                    do {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DB0839012AEDA3D0001CE54C /* cachedData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB0838FF2AEDA3D0001CE54C /* cachedData.xcdatamodeld */; };
+		DB0839222AEDA634001CE54C /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0839212AEDA634001CE54C /* PersistenceController.swift */; };
 		DB28ED7B2ADC22DC000094AF /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28ED7A2ADC22DC000094AF /* TimetableView.swift */; };
 		DB820A3E2AD686D20014F26B /* MSAL in Frameworks */ = {isa = PBXBuildFile; productRef = DB820A3D2AD686D20014F26B /* MSAL */; };
 		DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB820A412AD687730014F26B /* MSALAuthentication.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		DB0839002AEDA3D0001CE54C /* cachedData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = cachedData.xcdatamodel; sourceTree = "<group>"; };
+		DB0839212AEDA634001CE54C /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		DB28ED7A2ADC22DC000094AF /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
 		DB28ED7C2ADC283F000094AF /* Patesian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Patesian.entitlements; sourceTree = "<group>"; };
 		DB28ED7D2ADC28A9000094AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -90,7 +92,6 @@
 		DBCBE5E52AD5E85F000B58E7 = {
 			isa = PBXGroup;
 			children = (
-				DB0838FF2AEDA3D0001CE54C /* cachedData.xcdatamodeld */,
 				DBCBE5F02AD5E85F000B58E7 /* Patesian */,
 				DBCBE6012AD5E861000B58E7 /* PatesianTests */,
 				DBCBE60B2AD5E861000B58E7 /* PatesianUITests */,
@@ -112,6 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				DB28ED7D2ADC28A9000094AF /* Info.plist */,
+				DB0838FF2AEDA3D0001CE54C /* cachedData.xcdatamodeld */,
+				DB0839212AEDA634001CE54C /* PersistenceController.swift */,
 				DB28ED7C2ADC283F000094AF /* Patesian.entitlements */,
 				DBCBE5F12AD5E85F000B58E7 /* PatesianApp.swift */,
 				DBCBE5F32AD5E85F000B58E7 /* ContentView.swift */,
@@ -294,6 +297,7 @@
 				DB28ED7B2ADC22DC000094AF /* TimetableView.swift in Sources */,
 				DBBBE0242AEBD74F006E2BB3 /* NewsView.swift in Sources */,
 				DBCBE5F22AD5E85F000B58E7 /* PatesianApp.swift in Sources */,
+				DB0839222AEDA634001CE54C /* PersistenceController.swift in Sources */,
 				DB9265A62AEBC767001A6BE5 /* EventView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
