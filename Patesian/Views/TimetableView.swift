@@ -82,7 +82,9 @@ struct TimetableView: View {
     
     func removeall() {
         for x in CalendarDay {
+            print("hi")
             moc.delete(x)
+            
         }
         PersistenceController.shared.save()
     }
@@ -96,7 +98,8 @@ struct TimetableView: View {
             for y in x.eventArray {
                 schoolEventArray.append(schoolEvent(subject: y.subject!, teacher: y.teacher!, location: y.location!, start: y.start!, end: y.end!))
             }
-            cachedDay[x.date!] = schoolEventArray.sorted(by: { $0.start.compare($1.start) == .orderedAscending} )
+            //print(CalendarDay)
+            cachedDay[x.date ?? Date.distantFuture] = schoolEventArray.sorted(by: { $0.start.compare($1.start) == .orderedAscending} )
         }
         let result = cachedDay.sorted {
                                         $0.0 < $1.0
@@ -141,8 +144,10 @@ struct TimetableView: View {
                             DispatchQueue.main.async {
                                 settings.jsonRaw = jsonData
                             }
+                            removeall()
                             jsonParser(json: jsonData)
                             print(jsonData)
+                            
                         } else {
                             print("An error has ocurred")
                         }
@@ -182,7 +187,7 @@ struct TimetableView: View {
         URL.append(ISO8601DateFormatter().string(from: Date.now))
         URL.append("&enddatetime=")
         //let delta = Calendar.current.date(byAdding: .yearForWeekOfYear, value: 1, to: Date())
-        let delta = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date())
+        let delta = Calendar.current.date(byAdding: .year, value: 1, to: Date())
         let deltaString = ISO8601DateFormatter().string(from: delta!)
         URL.append(deltaString)
         URL.append("&$top=2000")
@@ -294,18 +299,24 @@ struct TimetableView: View {
     }
     
     func coredatawriter(currentResponse: graphResponse) {
-        for x in Array(currentResponse.value) {
-            let candy1 = Events(context: self.moc)
-            candy1.location = subjectGet(raw: x.location.displayName)
-            candy1.subject = subjectGet(raw: x.subject)
-            candy1.teacher = teacherGet(raw: x.subject)
-            candy1.start = x.start.dateTime
-            candy1.end = x.end.dateTime
-            candy1.daylink = Day(context: self.moc)
-            candy1.daylink?.date = stripDate(input: x.start.dateTime)
+        for x in CalendarDay {
             
+            for x in Array(currentResponse.value) {
+                print("hu")
+                let candy1 = Events(context: self.moc)
+                candy1.location = subjectGet(raw: x.location.displayName)
+                candy1.subject = subjectGet(raw: x.subject)
+                candy1.teacher = teacherGet(raw: x.subject)
+                candy1.start = x.start.dateTime
+                candy1.end = x.end.dateTime
+                candy1.daylink = Day(context: self.moc)
+                candy1.daylink?.date = stripDate(input: x.start.dateTime)
+                
+            }
         }
-        try? self.moc.save()
+        PersistenceController.shared.save()
+        
+        
         
         //print(currentResponse)
     }
@@ -392,8 +403,16 @@ struct TimetableView: View {
                         }
                 .refreshable {
                     print("Refreshing")
-                    removeall()
+                    //let queue = DispatchQueue(label: "my-queue", qos: .userInteractive)
+//                    queue.async {
+//                        removeall()
+//                    }
+//                    queue.async {
+//                        login()
+//                    }
                     login()
+                    
+                    
                 }
 //                }.task {
 //                    do {

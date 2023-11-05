@@ -33,11 +33,13 @@ struct SettingsView: View {
     
     func removeall() {
         for x in countries {
+            print("retard1")
             moc.delete(x)
-            
         }
-        PersistenceController.shared.save()
-    }
+            
+            PersistenceController.shared.save()
+        }
+    
     
     func delete(entityName: String) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
