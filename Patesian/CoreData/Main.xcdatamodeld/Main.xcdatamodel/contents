@@ -15,6 +15,6 @@
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="subject" optional="YES" attributeType="String"/>
         <attribute name="teacher" optional="YES" attributeType="String"/>
-        <relationship name="daylink" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Day" inverseName="eventlink" inverseEntity="Day"/>
+        <relationship name="daylink" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="eventlink" inverseEntity="Day"/>
     </entity>
 </model>

@@ -15,6 +15,30 @@ struct SettingsView: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Day.entity(), sortDescriptors: []) var countries: FetchedResults<Day>
     
+    func dateformat(date: Date) -> String {
+        let formatter1 = DateFormatter()
+        formatter1.dateFormat = "EEEE, d MMMM y"
+        return(formatter1.string(from: date))
+    }
+    
+    func removeLanguages(at offsets: IndexSet) {
+        //print(countries[offsets.first!])
+        for index in offsets {
+            let language = countries[index]
+            print(language)
+            moc.delete(language)
+        }
+        PersistenceController.shared.save()
+    }
+    
+    func removeall() {
+        for x in countries {
+            moc.delete(x)
+            
+        }
+        PersistenceController.shared.save()
+    }
+    
     func delete(entityName: String) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
@@ -42,14 +66,15 @@ struct SettingsView: View {
                     let fetchRequest1: NSFetchRequest<NSFetchRequestResult> = Events.fetchRequest()
                       let batchDeleteRequest1 = NSBatchDeleteRequest(fetchRequest: fetchRequest1)
                     _ = try? persistenceController.container.viewContext.execute(batchDeleteRequest1)
+                let fetchRequest2: NSFetchRequest<NSFetchRequestResult> = Day.fetchRequest()
+                  let batchDeleteRequest2 = NSBatchDeleteRequest(fetchRequest: fetchRequest2)
+                _ = try? persistenceController.container.viewContext.execute(batchDeleteRequest2)
                 try? self.moc.save()
                 //@FetchRequest(entity: Day.entity(), sortDescriptors: []) var countries: FetchedResults<Day>
                 
                 }
 //            Button("Clear2") {
-//                let fetchRequest1: NSFetchRequest<NSFetchRequestResult> = Day.fetchRequest()
-//                  let batchDeleteRequest1 = NSBatchDeleteRequest(fetchRequest: fetchRequest1)
-//                _ = try? persistenceController.container.viewContext.execute(batchDeleteRequest1)
+//                
 //            }
 //                let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Day")
 //                let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
@@ -60,17 +85,35 @@ struct SettingsView: View {
 //                    // TODO: handle the error
 //                }
             }
-            
+        Button("debyg"){
+            removeall()
+        }
             Button("Print") {
                 //print(Array(countries)[0].fullName)
                 //@FetchRequest(entity: Day.entity(), sortDescriptors: []) var countries: FetchedResults<Day>
-                for x in countries {
+//                for x in countries {
+//                    print(x.date)
+//                    for y in Array(x.eventArray) {
+//                        print(y.subject)
+//                    }
+//                }
+                //print(countries.first?.date)
+                    //print(Array(countries.first?.eventArray)
+                      for x in countries {
                     print(x.date)
-                    for y in Array(x.eventArray) {
-                        print(y.subject)
-                    }
+                          for y in x.eventArray {
+                              print(y.location)
+                          }
                 }
             }
+        
+        List {
+            ForEach(countries) { country in
+                Text(dateformat(date:country.date!))
+                
+            }.onDelete(perform: removeLanguages)
+        }
+        
             
             Button("Add") {
                 let candy1 = Events(context: self.moc)

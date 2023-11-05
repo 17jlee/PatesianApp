@@ -63,7 +63,7 @@ struct graphResponse: Codable {
 struct TimetableView: View {
     let persistenceController = PersistenceController.shared
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(entity: Day.entity(), sortDescriptors: []) var countries: FetchedResults<Day>
+    @FetchRequest(entity: Day.entity(), sortDescriptors: []) var CalendarDay: FetchedResults<Day>
     @EnvironmentObject var settings: loginSettings
     @State public var graphResult = ""
     @State private var accessTokenSource = ""
@@ -80,6 +80,25 @@ struct TimetableView: View {
         return strippedDate!
     }
     
+    func removeall() {
+        for x in CalendarDay {
+            moc.delete(x)
+        }
+        PersistenceController.shared.save()
+    }
+    
+    func cachedData() -> [[Date: [schoolEvent]]] {
+        var cachedCalendar = [[Date: [schoolEvent]]]()
+        for x in CalendarDay {
+            var schoolEventArray = [schoolEvent]()
+            for y in x.eventArray {
+                schoolEventArray.append(schoolEvent(subject: y.subject!, teacher: y.teacher!, location: y.location!, start: y.start!, end: y.end!))
+            }
+            cachedCalendar.append([x.date! : schoolEventArray])
+            
+        }
+        return cachedCalendar
+    }
     
     func login() {
             MSALAuthentication.signin(completion: { securityToken, isTokenCached, expiresOn in
@@ -154,7 +173,7 @@ struct TimetableView: View {
         URL.append(ISO8601DateFormatter().string(from: Date.now))
         URL.append("&enddatetime=")
         //let delta = Calendar.current.date(byAdding: .yearForWeekOfYear, value: 1, to: Date())
-        let delta = Calendar.current.date(byAdding: .year, value: 1, to: Date())
+        let delta = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date())
         let deltaString = ISO8601DateFormatter().string(from: delta!)
         URL.append(deltaString)
         URL.append("&$top=2000")
@@ -288,7 +307,7 @@ struct TimetableView: View {
         VStack {
             List {
                 
-                ForEach(settings.sortedData, id: \.self) { x in
+                ForEach(cachedData(), id: \.self) { x in
                     Section(dateformat(date: x.keys.first!)) {
                         ForEach(x[x.keys.first!]!, id: \.self) { eventObject in
                             HStack {
@@ -375,7 +394,7 @@ struct TimetableView: View {
 //                    }
 
                 .onAppear() {
-                        login()
+                        //login()
                         //print(settings.jsonRaw)
                         //jsonParser(json: settings.jsonRaw)
                     
