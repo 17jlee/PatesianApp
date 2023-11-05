@@ -89,15 +89,24 @@ struct TimetableView: View {
     
     func cachedData() -> [[Date: [schoolEvent]]] {
         var cachedCalendar = [[Date: [schoolEvent]]]()
+        var cachedDay = [Date : [schoolEvent]]()
+        var sortedArray = [[Date: [schoolEvent]]]()
         for x in CalendarDay {
             var schoolEventArray = [schoolEvent]()
             for y in x.eventArray {
                 schoolEventArray.append(schoolEvent(subject: y.subject!, teacher: y.teacher!, location: y.location!, start: y.start!, end: y.end!))
             }
-            cachedCalendar.append([x.date! : schoolEventArray])
+            cachedDay[x.date!] = schoolEventArray.sorted(by: { $0.start.compare($1.start) == .orderedAscending} )
+        }
+        let result = cachedDay.sorted {
+                                        $0.0 < $1.0
+                                    }
+        for x in result {
+            sortedArray.append([x.key : x.value])
             
         }
-        return cachedCalendar
+        print(sortedArray)
+        return sortedArray
     }
     
     func login() {
@@ -288,7 +297,7 @@ struct TimetableView: View {
         for x in Array(currentResponse.value) {
             let candy1 = Events(context: self.moc)
             candy1.location = subjectGet(raw: x.location.displayName)
-            candy1.subject = subjectGet(raw: x.location.displayName)
+            candy1.subject = subjectGet(raw: x.subject)
             candy1.teacher = teacherGet(raw: x.subject)
             candy1.start = x.start.dateTime
             candy1.end = x.end.dateTime
@@ -383,6 +392,7 @@ struct TimetableView: View {
                         }
                 .refreshable {
                     print("Refreshing")
+                    removeall()
                     login()
                 }
 //                }.task {
