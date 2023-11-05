@@ -28,11 +28,6 @@ struct PersistenceController {
         let controller = PersistenceController(inMemory: true)
 
         // Create 10 example programming languages.
-//        for x in 0..<10 {
-//            let language = ProgrammingLanguage(context: controller.container.viewContext)
-//            language.name = "Example Language \(x)"
-//            language.creator = "A. Programmer"
-//        }
 
         return controller
     }()
@@ -42,7 +37,7 @@ struct PersistenceController {
     init(inMemory: Bool = false) {
         // If you didn't name your model Main you'll need
         // to change this name below.
-        container = NSPersistentContainer(name: "cachedData")
+        container = NSPersistentContainer(name: "Main")
 
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
@@ -53,5 +48,7 @@ struct PersistenceController {
                 fatalError("Error: \(error.localizedDescription)")
             }
         }
+        self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
     }
+    
 }

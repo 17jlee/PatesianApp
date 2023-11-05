@@ -258,10 +258,10 @@ struct TimetableView: View {
             }
             
         }
-        let cache = Item(context: managedObjectContext)
+        //let cache = Item(context: managedObjectContext)
         let portabledictionaryStruct = portableCache()
         portabledictionaryStruct.currentCache = dictionaryStruct
-        cache.savedData = portabledictionaryStruct
+        //cache.savedData = portabledictionaryStruct
         PersistenceController.shared.save()
         return dictionaryStruct
     }

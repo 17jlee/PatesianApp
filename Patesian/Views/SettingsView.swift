@@ -9,15 +9,15 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var settings: loginSettings
-    @FetchRequest(sortDescriptors: []) var Items: FetchedResults<Item>
+    //@FetchRequest(sortDescriptors: []) var Items: FetchedResults<Item>
     var body: some View {
         List {
             
             Button("Print cache") {
                 print("test")
-                for x in Items{
-                    print(x.savedData?.currentCache)
-                }
+//                for x in Items{
+//                    print(x.savedData?.currentCache)
+//                }
                 
             }
             if settings.isAuthenticated {
