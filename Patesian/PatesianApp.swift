@@ -11,14 +11,14 @@ import SwiftUI
 struct PatesianApp: App {
     @Environment(\.scenePhase) var scenePhase
     let persistenceController = PersistenceController.shared
-    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                //.environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
-        .onChange(of: scenePhase) { _ in
-            persistenceController.save()
-        }
+//        .onChange(of: scenePhase) { _ in
+//            persistenceController.save()
+//        }
     }
 }

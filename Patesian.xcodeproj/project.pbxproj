@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DB0839012AEDA3D0001CE54C /* cachedData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB0838FF2AEDA3D0001CE54C /* cachedData.xcdatamodeld */; };
-		DB0839222AEDA634001CE54C /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0839212AEDA634001CE54C /* PersistenceController.swift */; };
 		DB28ED7B2ADC22DC000094AF /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28ED7A2ADC22DC000094AF /* TimetableView.swift */; };
+		DB335F962AF70EC50074E261 /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB335F942AF70EC50074E261 /* Main.xcdatamodeld */; };
+		DB335F9B2AF70F4A0074E261 /* Day+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB335F972AF70F4A0074E261 /* Day+CoreDataClass.swift */; };
+		DB335F9C2AF70F4A0074E261 /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB335F982AF70F4A0074E261 /* Day+CoreDataProperties.swift */; };
+		DB335F9D2AF70F4A0074E261 /* Events+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB335F992AF70F4A0074E261 /* Events+CoreDataClass.swift */; };
+		DB335F9E2AF70F4A0074E261 /* Events+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB335F9A2AF70F4A0074E261 /* Events+CoreDataProperties.swift */; };
+		DB335FA02AF7100B0074E261 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB335F9F2AF7100B0074E261 /* Persistence.swift */; };
 		DB820A3E2AD686D20014F26B /* MSAL in Frameworks */ = {isa = PBXBuildFile; productRef = DB820A3D2AD686D20014F26B /* MSAL */; };
 		DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB820A412AD687730014F26B /* MSALAuthentication.swift */; };
 		DB9265A62AEBC767001A6BE5 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9265A52AEBC767001A6BE5 /* EventView.swift */; };
@@ -42,11 +46,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DB0839002AEDA3D0001CE54C /* cachedData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = cachedData.xcdatamodel; sourceTree = "<group>"; };
-		DB0839212AEDA634001CE54C /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		DB28ED7A2ADC22DC000094AF /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
 		DB28ED7C2ADC283F000094AF /* Patesian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Patesian.entitlements; sourceTree = "<group>"; };
-		DB28ED7D2ADC28A9000094AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DB28ED7D2ADC28A9000094AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB335F952AF70EC50074E261 /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
+		DB335F972AF70F4A0074E261 /* Day+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DB335F982AF70F4A0074E261 /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DB335F992AF70F4A0074E261 /* Events+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Events+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DB335F9A2AF70F4A0074E261 /* Events+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Events+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DB335F9F2AF7100B0074E261 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		DB820A412AD687730014F26B /* MSALAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALAuthentication.swift; sourceTree = "<group>"; };
 		DB9265A52AEBC767001A6BE5 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		DBBBE0232AEBD74F006E2BB3 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
@@ -89,6 +97,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB335F622AF701AF0074E261 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				DB335F9F2AF7100B0074E261 /* Persistence.swift */,
+				DB335F942AF70EC50074E261 /* Main.xcdatamodeld */,
+				DB335F972AF70F4A0074E261 /* Day+CoreDataClass.swift */,
+				DB335F982AF70F4A0074E261 /* Day+CoreDataProperties.swift */,
+				DB335F992AF70F4A0074E261 /* Events+CoreDataClass.swift */,
+				DB335F9A2AF70F4A0074E261 /* Events+CoreDataProperties.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		DB335F632AF7022D0074E261 /* MSAL */ = {
+			isa = PBXGroup;
+			children = (
+				DB820A412AD687730014F26B /* MSALAuthentication.swift */,
+			);
+			path = MSAL;
+			sourceTree = "<group>";
+		};
+		DB335F642AF702530074E261 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DBCBE5F32AD5E85F000B58E7 /* ContentView.swift */,
+				DBBBE0232AEBD74F006E2BB3 /* NewsView.swift */,
+				DBBBE0252AEC6A62006E2BB3 /* SettingsView.swift */,
+				DB28ED7A2ADC22DC000094AF /* TimetableView.swift */,
+				DB9265A52AEBC767001A6BE5 /* EventView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		DBCBE5E52AD5E85F000B58E7 = {
 			isa = PBXGroup;
 			children = (
@@ -112,17 +153,12 @@
 		DBCBE5F02AD5E85F000B58E7 /* Patesian */ = {
 			isa = PBXGroup;
 			children = (
-				DB28ED7D2ADC28A9000094AF /* Info.plist */,
-				DB0838FF2AEDA3D0001CE54C /* cachedData.xcdatamodeld */,
-				DB0839212AEDA634001CE54C /* PersistenceController.swift */,
-				DB28ED7C2ADC283F000094AF /* Patesian.entitlements */,
 				DBCBE5F12AD5E85F000B58E7 /* PatesianApp.swift */,
-				DBCBE5F32AD5E85F000B58E7 /* ContentView.swift */,
-				DBBBE0232AEBD74F006E2BB3 /* NewsView.swift */,
-				DBBBE0252AEC6A62006E2BB3 /* SettingsView.swift */,
-				DB28ED7A2ADC22DC000094AF /* TimetableView.swift */,
-				DB9265A52AEBC767001A6BE5 /* EventView.swift */,
-				DB820A412AD687730014F26B /* MSALAuthentication.swift */,
+				DB28ED7D2ADC28A9000094AF /* Info.plist */,
+				DB28ED7C2ADC283F000094AF /* Patesian.entitlements */,
+				DB335F622AF701AF0074E261 /* CoreData */,
+				DB335F642AF702530074E261 /* Views */,
+				DB335F632AF7022D0074E261 /* MSAL */,
 				DBCBE5F52AD5E861000B58E7 /* Assets.xcassets */,
 				DBCBE5F72AD5E861000B58E7 /* Preview Content */,
 			);
@@ -291,13 +327,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBBBE0262AEC6A62006E2BB3 /* SettingsView.swift in Sources */,
-				DB0839012AEDA3D0001CE54C /* cachedData.xcdatamodeld in Sources */,
 				DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */,
+				DB335F9E2AF70F4A0074E261 /* Events+CoreDataProperties.swift in Sources */,
 				DBCBE5F42AD5E85F000B58E7 /* ContentView.swift in Sources */,
 				DB28ED7B2ADC22DC000094AF /* TimetableView.swift in Sources */,
 				DBBBE0242AEBD74F006E2BB3 /* NewsView.swift in Sources */,
+				DB335F9D2AF70F4A0074E261 /* Events+CoreDataClass.swift in Sources */,
+				DB335FA02AF7100B0074E261 /* Persistence.swift in Sources */,
 				DBCBE5F22AD5E85F000B58E7 /* PatesianApp.swift in Sources */,
-				DB0839222AEDA634001CE54C /* PersistenceController.swift in Sources */,
+				DB335F9B2AF70F4A0074E261 /* Day+CoreDataClass.swift in Sources */,
+				DB335F962AF70EC50074E261 /* Main.xcdatamodeld in Sources */,
+				DB335F9C2AF70F4A0074E261 /* Day+CoreDataProperties.swift in Sources */,
 				DB9265A62AEBC767001A6BE5 /* EventView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,6 +499,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Patesian/Patesian.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -490,6 +531,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Patesian/Patesian.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -653,13 +695,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		DB0838FF2AEDA3D0001CE54C /* cachedData.xcdatamodeld */ = {
+		DB335F942AF70EC50074E261 /* Main.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				DB0839002AEDA3D0001CE54C /* cachedData.xcdatamodel */,
+				DB335F952AF70EC50074E261 /* Main.xcdatamodel */,
 			);
-			currentVersion = DB0839002AEDA3D0001CE54C /* cachedData.xcdatamodel */;
-			path = cachedData.xcdatamodeld;
+			currentVersion = DB335F952AF70EC50074E261 /* Main.xcdatamodel */;
+			path = Main.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

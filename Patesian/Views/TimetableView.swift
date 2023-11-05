@@ -61,7 +61,9 @@ struct graphResponse: Codable {
 }
 
 struct TimetableView: View {
-    @Environment(\.managedObjectContext) var managedObjectContext
+    let persistenceController = PersistenceController.shared
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(entity: Day.entity(), sortDescriptors: []) var countries: FetchedResults<Day>
     @EnvironmentObject var settings: loginSettings
     @State public var graphResult = ""
     @State private var accessTokenSource = ""
@@ -172,6 +174,7 @@ struct TimetableView: View {
         decoder.dateDecodingStrategy = .formatted(dateFormatter)
         do {
             currentResponse = try decoder.decode(graphResponse.self, from: data)
+            coredatawriter(currentResponse: currentResponse!)
             let result = (dictionaryInit(currentResponse: currentResponse!)).sorted {
                                             $0.0 < $1.0
                                         }
@@ -258,12 +261,25 @@ struct TimetableView: View {
             }
             
         }
-        //let cache = Item(context: managedObjectContext)
-        let portabledictionaryStruct = portableCache()
-        portabledictionaryStruct.currentCache = dictionaryStruct
-        //cache.savedData = portabledictionaryStruct
-        PersistenceController.shared.save()
+
         return dictionaryStruct
+    }
+    
+    func coredatawriter(currentResponse: graphResponse) {
+        for x in Array(currentResponse.value) {
+            let candy1 = Events(context: self.moc)
+            candy1.location = subjectGet(raw: x.location.displayName)
+            candy1.subject = subjectGet(raw: x.location.displayName)
+            candy1.teacher = teacherGet(raw: x.subject)
+            candy1.start = x.start.dateTime
+            candy1.end = x.end.dateTime
+            candy1.daylink = Day(context: self.moc)
+            candy1.daylink?.date = stripDate(input: x.start.dateTime)
+            
+        }
+        try? self.moc.save()
+        
+        //print(currentResponse)
     }
     
     
