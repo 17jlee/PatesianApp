@@ -118,34 +118,45 @@ struct SettingsView: View {
         
             
             Button("Add") {
-                let candy1 = Events(context: self.moc)
-                candy1.location = "E109"
-                candy1.subject = "Computing"
-                candy1.teacher = "Mr Read"
-                candy1.start = Date.distantPast
-                candy1.end = Date.distantFuture
-                candy1.daylink = Day(context: self.moc)
-                candy1.daylink?.date = Date.now
-                
-                let candy2 = Events(context: self.moc)
-                candy2.location = "E111"
-                candy2.subject = "Computifng"
-                candy2.teacher = "Mr Reafd"
-                candy2.start = Date.distantPast
-                candy2.end = Date.distantFuture
-                candy2.daylink = Day(context: self.moc)
-                candy2.daylink?.date = Date.distantFuture
-                
-                let candy3 = Events(context: self.moc)
-                candy3.location = "E113"
-                candy3.subject = "Compuating"
-                candy3.teacher = "Mr Regad"
-                candy3.start = Date.distantPast
-                candy3.end = Date.distantFuture
-                candy3.daylink = Day(context: self.moc)
-                candy3.daylink?.date = Date.now
+                DispatchQueue.global(qos: .userInitiated).async {
+                    for x in countries {
+                        print("retard1")
+                        moc.delete(x)
+                    }
+                        
+                    PersistenceController.shared.save()
+                    let candy1 = Events(context: self.moc)
+                    candy1.location = "E109"
+                    candy1.subject = "Computing"
+                    candy1.teacher = "Mr Read"
+                    candy1.start = Date.distantPast
+                    candy1.end = Date.distantFuture
+                    candy1.daylink = Day(context: self.moc)
+                    candy1.daylink?.date = Date.now
+                    
+                    let candy2 = Events(context: self.moc)
+                    candy2.location = "E111"
+                    candy2.subject = "Computifng"
+                    candy2.teacher = "Mr Reafd"
+                    candy2.start = Date.distantPast
+                    candy2.end = Date.distantFuture
+                    candy2.daylink = Day(context: self.moc)
+                    candy2.daylink?.date = Date.distantFuture
+                    
+                    let candy3 = Events(context: self.moc)
+                    candy3.location = "E113"
+                    candy3.subject = "Compuating"
+                    candy3.teacher = "Mr Regad"
+                    candy3.start = Date.distantPast
+                    candy3.end = Date.distantFuture
+                    candy3.daylink = Day(context: self.moc)
+                    candy3.daylink?.date = Date.now
 
-                try? self.moc.save()
+                    try? self.moc.save()
+
+    
+                }
+                
             }
         }
 
