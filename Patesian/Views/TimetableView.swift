@@ -86,7 +86,7 @@ struct TimetableView: View {
         }
         PersistenceController.shared.save()
     }
-    
+    //but heaven aint close in a place like this
     func cachedData() -> [[Date: [schoolEvent]]] {
         var cachedCalendar = [[Date: [schoolEvent]]]()
         var cachedDay = [Date : [schoolEvent]]()
