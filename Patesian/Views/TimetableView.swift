@@ -182,7 +182,7 @@ struct TimetableView: View {
         URL.append(ISO8601DateFormatter().string(from: Date.now))
         URL.append("&enddatetime=")
         //let delta = Calendar.current.date(byAdding: .yearForWeekOfYear, value: 1, to: Date())
-        let delta = Calendar.current.date(byAdding: .year, value: 1, to: Date())
+        let delta = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date())
         let deltaString = ISO8601DateFormatter().string(from: delta!)
         URL.append(deltaString)
         URL.append("&$top=2000")
@@ -294,18 +294,8 @@ struct TimetableView: View {
     }
     
     func coredatawriter(currentResponse: graphResponse) {
-        for x in Array(currentResponse.value) {
-            let candy1 = Events(context: self.moc)
-            candy1.location = subjectGet(raw: x.location.displayName)
-            candy1.subject = subjectGet(raw: x.subject)
-            candy1.teacher = teacherGet(raw: x.subject)
-            candy1.start = x.start.dateTime
-            candy1.end = x.end.dateTime
-            candy1.daylink = Day(context: self.moc)
-            candy1.daylink?.date = stripDate(input: x.start.dateTime)
-            
+        DispatchQueue.main.async {
             for x in Array(currentResponse.value) {
-                print("hu")
                 let candy1 = Events(context: self.moc)
                 candy1.location = subjectGet(raw: x.location.displayName)
                 candy1.subject = subjectGet(raw: x.subject)
@@ -316,9 +306,8 @@ struct TimetableView: View {
                 candy1.daylink?.date = stripDate(input: x.start.dateTime)
                 
             }
+            try? self.moc.save()
         }
-        PersistenceController.shared.save()
-        
         
         
         //print(currentResponse)
@@ -406,16 +395,8 @@ struct TimetableView: View {
                         }
                 .refreshable {
                     print("Refreshing")
-                    //let queue = DispatchQueue(label: "my-queue", qos: .userInteractive)
-//                    queue.async {
-//                        removeall()
-//                    }
-//                    queue.async {
-//                        login()
-//                    }
+                    removeall()
                     login()
-                    
-                    
                 }
 //                }.task {
 //                    do {
