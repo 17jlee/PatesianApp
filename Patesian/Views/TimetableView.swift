@@ -81,10 +81,14 @@ struct TimetableView: View {
     }
     
     func removeall() {
-        for x in CalendarDay {
-            moc.delete(x)
+        DispatchQueue.global(qos: .userInitiated).async {
+            for x in CalendarDay {
+                moc.delete(x)
+            }
+            DispatchQueue.global(qos: .userInitiated).async {
+                PersistenceController.shared.save()
+            }
         }
-        PersistenceController.shared.save()
     }
     
     func cachedData() -> [[Date: [schoolEvent]]] {
@@ -295,7 +299,7 @@ struct TimetableView: View {
     }
     
     func coredatawriter(currentResponse: graphResponse) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .userInitiated).async {
             for x in Array(currentResponse.value) {
                 let candy1 = Events(context: self.moc)
                 candy1.location = subjectGet(raw: x.location.displayName)
@@ -401,9 +405,12 @@ struct TimetableView: View {
                         }
                 .refreshable {
                     print("Refreshing")
-                    DispatchQueue.main.async {
+                    DispatchQueue.global(qos: .userInitiated).async {
                         removeall()
-                        login()
+                        DispatchQueue.main.sync {
+                            login()
+                        }
+                        
                         
                     }
                     
