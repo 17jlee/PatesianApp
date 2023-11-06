@@ -215,9 +215,7 @@ struct TimetableView: View {
                 
             }
             
-            DispatchQueue.main.async {
-                settings.sortedData = surt
-            }
+            
             
             
             return surt
@@ -310,7 +308,10 @@ struct TimetableView: View {
                 
             }
             try? self.moc.save()
-            cached  = cachedData()
+            //cached = cachedData()
+            DispatchQueue.main.async {
+                settings.sortedData = cachedData()
+            }
         }
         
         
@@ -323,7 +324,7 @@ struct TimetableView: View {
         VStack {
             List {
                 
-                ForEach(cached, id: \.self) { x in
+                ForEach(settings.sortedData, id: \.self) { x in
                     Section(dateformat(date: x.keys.first!)) {
                         ForEach(x[x.keys.first!]!, id: \.self) { eventObject in
                             HStack {
@@ -420,7 +421,7 @@ struct TimetableView: View {
 //                    }
 
                 .onAppear() {
-                    cached = cachedData()
+                    settings.sortedData = cachedData()
                         //login()
                         //print(settings.jsonRaw)
                         //jsonParser(json: settings.jsonRaw)
