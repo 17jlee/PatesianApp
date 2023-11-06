@@ -119,86 +119,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D15F5F02-9346-4342-B5F7-2939AE20A641"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Patesian/Views/TimetableView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
-            landmarkName = "coredatawriter(currentResponse:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D15F5F02-9346-4342-B5F7-2939AE20A641 - 98c55d4d49aaff48"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Patesian.TimetableView.coredatawriter(currentResponse: Patesian.graphResponse) -&gt; ()"
-                  moduleName = "Patesian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiminlee/Library/Mobile%20Documents/com~apple~CloudDocs/projectMarauder/Patesian/Patesian/Views/TimetableView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "297"
-                  endingLineNumber = "297"
-                  offsetFromSymbolStart = "444">
-               </Location>
-               <Location
-                  uuid = "D15F5F02-9346-4342-B5F7-2939AE20A641 - 98c55d4d49aaff48"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Patesian.TimetableView.coredatawriter(currentResponse: Patesian.graphResponse) -&gt; ()"
-                  moduleName = "Patesian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiminlee/Library/Mobile%20Documents/com~apple~CloudDocs/projectMarauder/Patesian/Patesian/Views/TimetableView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "297"
-                  endingLineNumber = "297"
-                  offsetFromSymbolStart = "640">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7CFFE4A3-73C5-4308-BEAB-AF1662DC63C5"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Patesian/Views/TimetableView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
-            landmarkName = "coredatawriter(currentResponse:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BB2395D5-E045-4F53-8C3E-11CF12BB0E49"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Patesian/Views/TimetableView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "login()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "2BB87B2B-FD34-404D-9A94-0DBEDE2E59A2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -242,6 +162,22 @@
                   offsetFromSymbolStart = "1356">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A4162862-A424-4A89-BA88-9AB3FD39BA19"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Patesian/Views/TimetableView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "404"
+            endingLineNumber = "404"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

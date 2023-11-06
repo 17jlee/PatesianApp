@@ -70,7 +70,7 @@ struct TimetableView: View {
     @State private var showingAlert = false
     @State var currentResponse: graphResponse? = nil
     @State var graphText = ""
-    @State var cachedObjects = [[Date: [schoolEvent]]]()
+    @State var cached = [[Date: [schoolEvent]]]()
     @State var sortedDict = [[Date : [[String : String]]].Element]()
     @State var listView = false
 
@@ -87,8 +87,7 @@ struct TimetableView: View {
         PersistenceController.shared.save()
     }
     
-    func cachedData(){
-        print(CalendarDay)
+    func cachedData() -> [[Date: [schoolEvent]]] {
         var cachedCalendar = [[Date: [schoolEvent]]]()
         var cachedDay = [Date : [schoolEvent]]()
         var sortedArray = [[Date: [schoolEvent]]]()
@@ -106,9 +105,8 @@ struct TimetableView: View {
             sortedArray.append([x.key : x.value])
             
         }
-        //print(sortedArray)
-        cachedObjects = sortedArray
-        print("bruh \(sortedArray) \(CalendarDay)")
+        print(sortedArray)
+        return sortedArray
     }
     
     func login() {
@@ -144,6 +142,7 @@ struct TimetableView: View {
                                 settings.jsonRaw = jsonData
                             }
                             jsonParser(json: jsonData)
+                            
                             print(jsonData)
                         } else {
                             print("An error has ocurred")
@@ -205,6 +204,8 @@ struct TimetableView: View {
         do {
             currentResponse = try decoder.decode(graphResponse.self, from: data)
             coredatawriter(currentResponse: currentResponse!)
+            
+            
             let result = (dictionaryInit(currentResponse: currentResponse!)).sorted {
                                             $0.0 < $1.0
                                         }
@@ -296,8 +297,7 @@ struct TimetableView: View {
     }
     
     func coredatawriter(currentResponse: graphResponse) {
-        //print(currentResponse)
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.main.async {
             for x in Array(currentResponse.value) {
                 let candy1 = Events(context: self.moc)
                 candy1.location = subjectGet(raw: x.location.displayName)
@@ -307,10 +307,10 @@ struct TimetableView: View {
                 candy1.end = x.end.dateTime
                 candy1.daylink = Day(context: self.moc)
                 candy1.daylink?.date = stripDate(input: x.start.dateTime)
-                print(candy1)
+                
             }
             try? self.moc.save()
-        
+            cached  = cachedData()
         }
         
         
@@ -323,7 +323,7 @@ struct TimetableView: View {
         VStack {
             List {
                 
-                ForEach(cachedObjects, id: \.self) { x in
+                ForEach(cached, id: \.self) { x in
                     Section(dateformat(date: x.keys.first!)) {
                         ForEach(x[x.keys.first!]!, id: \.self) { eventObject in
                             HStack {
@@ -382,7 +382,8 @@ struct TimetableView: View {
                     ToolbarItem(placement: .automatic) {
                         Button {
                             listView.toggle()
-                            print(settings.jsonRaw)
+                            //print(settings.sortedData)
+                            //cached.append([Date.now : [schoolEvent(subject: "ff", teacher: "gg", location: "hh", start: Date.distantFuture, end: Date.distantPast)]])
                         } label: {
                             if listView {
                                 Image(systemName: "calendar")
@@ -399,12 +400,15 @@ struct TimetableView: View {
                         }
                 .refreshable {
                     print("Refreshing")
-                    //DispatchQueue.global(qos: .userInitiated).async {
+                    DispatchQueue.main.async {
                         removeall()
                         login()
-                        cachedData()
-                    print("here \(cachedObjects)")
-                    //}
+                        
+                    }
+                    
+                    
+                    
+                    
                     
                 }
 //                }.task {
@@ -416,6 +420,7 @@ struct TimetableView: View {
 //                    }
 
                 .onAppear() {
+                    cached = cachedData()
                         //login()
                         //print(settings.jsonRaw)
                         //jsonParser(json: settings.jsonRaw)
