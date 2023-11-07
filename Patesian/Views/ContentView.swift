@@ -8,25 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct Location: Identifiable {
-    let id = UUID()
-    let name: String
-    let coordinate: CLLocationCoordinate2D
-}
 
-extension CLLocationCoordinate2D {
-    static let pates = CLLocationCoordinate2D(latitude: 51.9064680171035, longitude: -2.1159158133789875)
-}
-
-struct MapView: View {
-    var body: some View {
-        Map() {
-            Annotation("Pate's", coordinate: .pates) {
-                
-            }
-        }
-    }
-}
 
 struct SettingsView1: View {
     var body: some View {
@@ -61,11 +43,11 @@ struct ContentView: View {
             }
             
             NavigationStack {
-                NewsView()
-                .navigationTitle("News")
+                FriendsView()
+                .navigationTitle("Friends")
                 
             }.tabItem {
-                Label("News", systemImage: "newspaper")
+                Label("Friends", systemImage: "person.3")
             }
             
             NavigationStack {

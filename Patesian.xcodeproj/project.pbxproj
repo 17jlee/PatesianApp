@@ -17,7 +17,7 @@
 		DB820A3E2AD686D20014F26B /* MSAL in Frameworks */ = {isa = PBXBuildFile; productRef = DB820A3D2AD686D20014F26B /* MSAL */; };
 		DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB820A412AD687730014F26B /* MSALAuthentication.swift */; };
 		DB9265A62AEBC767001A6BE5 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9265A52AEBC767001A6BE5 /* EventView.swift */; };
-		DBBBE0242AEBD74F006E2BB3 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBBE0232AEBD74F006E2BB3 /* NewsView.swift */; };
+		DBBBE0242AEBD74F006E2BB3 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBBE0232AEBD74F006E2BB3 /* FriendsView.swift */; };
 		DBBBE0262AEC6A62006E2BB3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBBE0252AEC6A62006E2BB3 /* SettingsView.swift */; };
 		DBCBE5F22AD5E85F000B58E7 /* PatesianApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE5F12AD5E85F000B58E7 /* PatesianApp.swift */; };
 		DBCBE5F42AD5E85F000B58E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE5F32AD5E85F000B58E7 /* ContentView.swift */; };
@@ -26,6 +26,7 @@
 		DBCBE6032AD5E861000B58E7 /* PatesianTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE6022AD5E861000B58E7 /* PatesianTests.swift */; };
 		DBCBE60D2AD5E861000B58E7 /* PatesianUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE60C2AD5E861000B58E7 /* PatesianUITests.swift */; };
 		DBCBE60F2AD5E861000B58E7 /* PatesianUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE60E2AD5E861000B58E7 /* PatesianUITestsLaunchTests.swift */; };
+		DBFA9C432AFA4A2900935B93 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFA9C422AFA4A2900935B93 /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +58,7 @@
 		DB335F9F2AF7100B0074E261 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		DB820A412AD687730014F26B /* MSALAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALAuthentication.swift; sourceTree = "<group>"; };
 		DB9265A52AEBC767001A6BE5 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
-		DBBBE0232AEBD74F006E2BB3 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
+		DBBBE0232AEBD74F006E2BB3 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		DBBBE0252AEC6A62006E2BB3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		DBCBE5EE2AD5E85F000B58E7 /* Patesian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patesian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBE5F12AD5E85F000B58E7 /* PatesianApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatesianApp.swift; sourceTree = "<group>"; };
@@ -69,6 +70,7 @@
 		DBCBE6082AD5E861000B58E7 /* PatesianUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PatesianUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCBE60C2AD5E861000B58E7 /* PatesianUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatesianUITests.swift; sourceTree = "<group>"; };
 		DBCBE60E2AD5E861000B58E7 /* PatesianUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatesianUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DBFA9C422AFA4A2900935B93 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,10 +124,11 @@
 			isa = PBXGroup;
 			children = (
 				DBCBE5F32AD5E85F000B58E7 /* ContentView.swift */,
-				DBBBE0232AEBD74F006E2BB3 /* NewsView.swift */,
+				DBBBE0232AEBD74F006E2BB3 /* FriendsView.swift */,
 				DBBBE0252AEC6A62006E2BB3 /* SettingsView.swift */,
 				DB28ED7A2ADC22DC000094AF /* TimetableView.swift */,
 				DB9265A52AEBC767001A6BE5 /* EventView.swift */,
+				DBFA9C422AFA4A2900935B93 /* MapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -331,8 +334,9 @@
 				DB335F9E2AF70F4A0074E261 /* Events+CoreDataProperties.swift in Sources */,
 				DBCBE5F42AD5E85F000B58E7 /* ContentView.swift in Sources */,
 				DB28ED7B2ADC22DC000094AF /* TimetableView.swift in Sources */,
-				DBBBE0242AEBD74F006E2BB3 /* NewsView.swift in Sources */,
+				DBBBE0242AEBD74F006E2BB3 /* FriendsView.swift in Sources */,
 				DB335F9D2AF70F4A0074E261 /* Events+CoreDataClass.swift in Sources */,
+				DBFA9C432AFA4A2900935B93 /* MapView.swift in Sources */,
 				DB335FA02AF7100B0074E261 /* Persistence.swift in Sources */,
 				DBCBE5F22AD5E85F000B58E7 /* PatesianApp.swift in Sources */,
 				DB335F9B2AF70F4A0074E261 /* Day+CoreDataClass.swift in Sources */,
