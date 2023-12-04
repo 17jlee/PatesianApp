@@ -105,7 +105,7 @@ struct TimetableView: View {
             sortedArray.append([x.key : x.value])
             
         }
-        print(sortedArray)
+        //print(sortedArray)
         return sortedArray
     }
     
@@ -143,7 +143,7 @@ struct TimetableView: View {
                             }
                             jsonParser(json: jsonData)
                             
-                            print(jsonData)
+                            //print(jsonData)
                         } else {
                             print("An error has ocurred")
                         }
@@ -180,10 +180,12 @@ struct TimetableView: View {
     
     func URLString() -> String {
         var URL = "https://graph.microsoft.com/v1.0/me/calendarview?startdatetime="
-        URL.append(ISO8601DateFormatter().string(from: Date.now))
+        let backdelta = Calendar.current.date(byAdding: .year, value: -1, to: Date())
+        print(backdelta)
+        URL.append(ISO8601DateFormatter().string(from: backdelta!))
         URL.append("&enddatetime=")
         //let delta = Calendar.current.date(byAdding: .yearForWeekOfYear, value: 1, to: Date())
-        let delta = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date())
+        let delta = Calendar.current.date(byAdding: .year, value: 1, to: Date())
         let deltaString = ISO8601DateFormatter().string(from: delta!)
         URL.append(deltaString)
         URL.append("&$top=2000")
@@ -321,112 +323,145 @@ struct TimetableView: View {
     
     var body: some View {
         VStack {
-            List {
+            
+            ScrollViewReader{ proxy in
                 
-                ForEach(cached, id: \.self) { x in
-                    Section(dateformat(date: x.keys.first!)) {
-                        ForEach(x[x.keys.first!]!, id: \.self) { eventObject in
-                            HStack {
+                if cached.isEmpty == false {
+                    Text("loaded")
+                        .onAppear() {
+                            withAnimation{
+                                proxy.scrollTo(stripDate(input: Date.now), anchor: .top)
+                            }
+                        }
+                }
+                
+                Button("Jump to #50") {
+                    withAnimation{
+                        proxy.scrollTo(stripDate(input: Date.now), anchor: .top)
+                    }
+                    
+                }
+                
+                List {
+                    
+                    ForEach(cached, id: \.self) { x in
+                        Section(dateformat(date: x.keys.first!)) {
+                            ForEach(x[x.keys.first!]!, id: \.self) { eventObject in
+                                HStack {
 
-                                RoundedRectangle(cornerRadius: 50)
-                                    .fill(Color.patesRed)
-                                    .frame(width: 4, height: 40)
-                                VStack {
-                                    HStack {
-                                        Text("\(String(eventObject.subject))")
-                                            .font(Font.headline.weight(.bold))
-                                        Spacer()
-                                    }
+                                    RoundedRectangle(cornerRadius: 50)
+                                        .fill(Color.patesRed)
+                                        .frame(width: 4, height: 40)
+                                    VStack {
+                                        HStack {
+                                            Text("\(String(eventObject.subject))")
+                                                .font(Font.headline.weight(.bold))
+                                            Spacer()
+                                        }
 
-                                    HStack {
-                                        if String(eventObject.location) == "" && String(eventObject.teacher) == "" {
-                                            Text("")
-                                                .padding(.bottom, 3)
-                                        }
-                                        else if String(eventObject.location) == "" {
-                                            Text("\(eventObject.teacher)")
-                                                .font(Font.headline.weight(.light))
-                                        }
-                                        else {
-                                            Text("\(String(eventObject.location)) - \(String(eventObject.teacher))")
-                                                .font(Font.headline.weight(.light))
+                                        HStack {
+                                            if String(eventObject.location) == "" && String(eventObject.teacher) == "" {
+                                                Text("")
+                                                    .padding(.bottom, 3)
+                                            }
+                                            else if String(eventObject.location) == "" {
+                                                Text("\(eventObject.teacher)")
+                                                    .font(Font.headline.weight(.light))
+                                            }
+                                            else {
+                                                Text("\(String(eventObject.location)) - \(String(eventObject.teacher))")
+                                                    .font(Font.headline.weight(.light))
+                                            }
+                                            
+                                            Spacer()
                                         }
                                         
-                                        Spacer()
                                     }
-                                    
+
+                                    Spacer()
+                                    VStack {
+                                        HStack {
+                                            Spacer()
+                                            Text("\(period(start: eventObject.start, end:eventObject.end))")
+                                        }
+                                        HStack {
+                                            Spacer()
+                                            Text("\(String(timeformat(date: eventObject.start))) - \(String(timeformat(date: eventObject.end)))")
+                                        }
+                                        
+
+                                    }
                                 }
 
-                                Spacer()
-                                VStack {
-                                    HStack {
-                                        Spacer()
-                                        Text("\(period(start: eventObject.start, end:eventObject.end))")
-                                    }
-                                    HStack {
-                                        Spacer()
-                                        Text("\(String(timeformat(date: eventObject.start))) - \(String(timeformat(date: eventObject.end)))")
-                                    }
-                                    
-
+                            }
+                        }
+                        
+                        .id(x.keys.first!)
+                    }
+                }
+                .onChange(of: cached){
+                    withAnimation{
+                        proxy.scrollTo(stripDate(input: Date.now), anchor: .top)
+                    }
+                    
+                }
+                .listStyle(.plain)
+                    .navigationTitle("Timetable")
+                    .toolbar {
+                        ToolbarItem(placement: .automatic) {
+                            Button {
+                                listView.toggle()
+                                //print(settings.sortedData)
+                                //cached.append([Date.now : [schoolEvent(subject: "ff", teacher: "gg", location: "hh", start: Date.distantFuture, end: Date.distantPast)]])
+                            } label: {
+                                if listView {
+                                    Image(systemName: "calendar")
+                                }
+                                else {
+                                    Image(systemName: "calendar.day.timeline.left")
                                 }
                             }
+                        }
 
-                        }
                     }
-                }
-            }
-            .listStyle(.plain)
-                .navigationTitle("Timetable")
-                .toolbar {
-                    ToolbarItem(placement: .automatic) {
-                        Button {
-                            listView.toggle()
-                            //print(settings.sortedData)
-                            //cached.append([Date.now : [schoolEvent(subject: "ff", teacher: "gg", location: "hh", start: Date.distantFuture, end: Date.distantPast)]])
-                        } label: {
-                            if listView {
-                                Image(systemName: "calendar")
+                    .alert(isPresented: $showingAlert) {
+                                Alert(title: Text("Error"), message: Text("Unable to authenticate"), dismissButton: .default(Text("OK")))
                             }
-                            else {
-                                Image(systemName: "calendar.day.timeline.left")
-                            }
+                    .refreshable {
+                        print("Refreshing")
+                        DispatchQueue.main.async {
+                            removeall()
+                            login()
+                            
                         }
-                    }
-
-                }
-                .alert(isPresented: $showingAlert) {
-                            Alert(title: Text("Error"), message: Text("Unable to authenticate"), dismissButton: .default(Text("OK")))
-                        }
-                .refreshable {
-                    print("Refreshing")
-                    DispatchQueue.main.async {
-                        removeall()
-                        login()
+                        
+                        
+                        
+                        
                         
                     }
-                    
-                    
-                    
-                    
-                    
-                }
-//                }.task {
-//                    do {
-//                        try await login()
-//                        print(settings.jsonRaw)
-//                    } catch {
-//                        print("error")
-//                    }
+    //                }.task {
+    //                    do {
+    //                        try await login()
+    //                        print(settings.jsonRaw)
+    //                    } catch {
+    //                        print("error")
+    //                    }
 
-                .onAppear() {
-                    cached = cachedData()
-                        //login()
-                        //print(settings.jsonRaw)
-                        //jsonParser(json: settings.jsonRaw)
-                    
-                    
-                }
+                    .onAppear() {
+                        print(cached.isEmpty)
+                            cached = cachedData()
+                            
+                        
+                        
+                            //login()
+                            //print(settings.jsonRaw)
+                            //jsonParser(json: settings.jsonRaw)
+                        
+                        
+                    }
+            }
+            
         }
         
     }
