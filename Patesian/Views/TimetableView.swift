@@ -8,58 +8,6 @@
 import SwiftUI
 import Foundation
 
-extension Color {
-    static var patesRed: Color { Color(red: 0.78, green: 0.06, blue: 0.23) }
-    static var patesRedAlt: Color {Color(red: 0.86, green: 0.03, blue: 0.08)}
-}
-
-@MainActor class loginSettings: ObservableObject {
-    @Published var isAuthenticated = false
-    @Published var sortedData = [[Date: [schoolEvent]]]()
-    @Published var graphResult = ""
-    @Published var jsonRaw = Data()
-    
-    init(previewing: Bool = false) {
-            if previewing {
-                var sortedData = [[Date: [schoolEvent]]]()
-                var graphResult = ""
-            }
-        }
-
-}
-
-public class portableCache: NSObject {
-    var currentCache = [Date : [schoolEvent]]()
-}
-
-struct schoolEvent: Hashable {
-    var subject: String
-    var teacher: String
-    var location: String
-    var start: Date
-    var end: Date
-}
-
-struct graphDate: Codable {
-    var dateTime: Date
-}
-
-struct graphLocation: Codable {
-    var displayName: String
-}
-
-struct schoolEventRaw: Codable {
-    var subject: String
-    var bodyPreview: String
-    var start: graphDate
-    var end: graphDate
-    var location: graphLocation
-}
-
-struct graphResponse: Codable {
-    var value: [schoolEventRaw]
-}
-
 struct TimetableView: View {
     let persistenceController = PersistenceController.shared
     @Environment(\.managedObjectContext) var moc
@@ -73,40 +21,13 @@ struct TimetableView: View {
     @State var cached = [[Date: [schoolEvent]]]()
     @State var sortedDict = [[Date : [[String : String]]].Element]()
     @State var listView = false
+    //but heaven aint close in a place like this
 
-    
-    func stripDate(input: Date) -> Date {
-        let strippedDate = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: input))
-        return strippedDate!
-    }
-    
     func removeall() {
         for x in CalendarDay {
             moc.delete(x)
         }
         PersistenceController.shared.save()
-    }
-    //but heaven aint close in a place like this
-    func cachedData() -> [[Date: [schoolEvent]]] {
-        var cachedCalendar = [[Date: [schoolEvent]]]()
-        var cachedDay = [Date : [schoolEvent]]()
-        var sortedArray = [[Date: [schoolEvent]]]()
-        for x in CalendarDay {
-            var schoolEventArray = [schoolEvent]()
-            for y in x.eventArray {
-                schoolEventArray.append(schoolEvent(subject: y.subject!, teacher: y.teacher!, location: y.location!, start: y.start!, end: y.end!))
-            }
-            cachedDay[x.date!] = schoolEventArray.sorted(by: { $0.start.compare($1.start) == .orderedAscending} )
-        }
-        let result = cachedDay.sorted {
-                                        $0.0 < $1.0
-                                    }
-        for x in result {
-            sortedArray.append([x.key : x.value])
-            
-        }
-        //print(sortedArray)
-        return sortedArray
     }
     
     func login() {
@@ -156,45 +77,6 @@ struct TimetableView: View {
             })
         }
     
-    
-    func period(start: Date, end: Date) -> String {
-        let combined = (timeformat(date: start), timeformat(date: end))
-        switch combined {
-        case("08:40", "08:55") :
-            return("AM Registration")
-        case("09:00", "10:00") :
-            return("Period 1")
-        case("10:05", "11:05") :
-            return("Period 2")
-        case("11:35", "12:35") :
-            return("Period 3")
-        case("12:40", "13:40") :
-            return("Period 4")
-        case("14:40", "15:40") :
-            return("Period 5")
-        default :
-            return("")
-        
-        }
-    }
-    
-    func URLString() -> String {
-        var URL = "https://graph.microsoft.com/v1.0/me/calendarview?startdatetime="
-        let backdelta = Calendar.current.date(byAdding: .year, value: -1, to: Date())
-        print(backdelta)
-        URL.append(ISO8601DateFormatter().string(from: backdelta!))
-        URL.append("&enddatetime=")
-        //let delta = Calendar.current.date(byAdding: .yearForWeekOfYear, value: 1, to: Date())
-        let delta = Calendar.current.date(byAdding: .year, value: 1, to: Date())
-        let deltaString = ISO8601DateFormatter().string(from: delta!)
-        URL.append(deltaString)
-        URL.append("&$top=2000")
-        return URL
-    }
-    //https://graph.microsoft.com/v1.0/me/events?$select=subject,bodyPreview,start,end,location&$top=2002
-    //https://graph.microsoft.com/v1.0/me/calendarview?startdatetime=2023-12-20T07:51:29.223Z&enddatetime=2024-12-27T07:51:29.223Z&$select=subject,bodyPreview,start,end,location&$top=2000
-    
-    
     func jsonParser(json: Data) -> [[Date: [schoolEvent]]]{
         let data = json
         //print(json)
@@ -230,93 +112,30 @@ struct TimetableView: View {
         
     }
     
-    func subjectGet(raw: String) -> String {
-            if raw.contains(" - ") {
-                let str = raw
-                let teacherStart = str.range(of: " - ")!.upperBound
-                let teacherEnd = str.endIndex
 
-                let subjectEnd = str.range(of: " - ")!.lowerBound
-                let subjectStart = str.startIndex
-                let subjectRange = subjectStart..<subjectEnd
-
-                let subjectSubstring = str[subjectRange]  // play
-                
-                return String(subjectSubstring)
-            
-        }
-        else {
-            return("")
-        }
-    }
     
-    func teacherGet(raw: String) -> String {
-            if raw.contains(" - ") {
-                let str = raw
-                let teacherStart = str.range(of: " - ")!.upperBound
-                let teacherEnd = str.endIndex
-
-                let subjectEnd = str.range(of: " - ")!.lowerBound
-                let subjectStart = str.startIndex
-
-                let teacherRange = teacherStart..<teacherEnd
-
-                let teacherSubString = str[teacherRange]  // play
-                
-                return String(teacherSubString)
-            
-        }
-        else {
-            return("")
-        }
-    }
     
-    func timeformat(date: Date) -> String {
-        let formatter1 = DateFormatter()
-        formatter1.dateFormat = "HH:mm"
-        return(formatter1.string(from: date))
-    }
+
     
-    func dateformat(date: Date) -> String {
-        let formatter1 = DateFormatter()
-        formatter1.dateFormat = "EEEE, d MMMM y"
-        return(formatter1.string(from: date))
-    }
 
-    func dictionaryInit(currentResponse: graphResponse) -> [Date : [schoolEvent]] {
-        var dictionaryStruct = [Date : [schoolEvent]]()
-        for x in Array(currentResponse.value) {
-            if dictionaryStruct[stripDate(input: x.start.dateTime)] == nil {
-                dictionaryStruct[stripDate(input: x.start.dateTime)] = [schoolEvent(subject: subjectGet(raw: x.subject), teacher: teacherGet(raw: x.subject), location: subjectGet(raw: x.location.displayName), start: x.start.dateTime, end: x.end.dateTime)]
-            }
-            else {
-                dictionaryStruct[stripDate(input: x.start.dateTime)]!.append(schoolEvent(subject: subjectGet(raw: x.subject), teacher: teacherGet(raw: x.subject), location: subjectGet(raw: x.location.displayName), start: x.start.dateTime, end: x.end.dateTime))
-            }
-            
-        }
-
-        return dictionaryStruct
-    }
+    
     
     func coredatawriter(currentResponse: graphResponse) {
         DispatchQueue.main.async {
             for x in Array(currentResponse.value) {
                 let candy1 = Events(context: self.moc)
-                candy1.location = subjectGet(raw: x.location.displayName)
-                candy1.subject = subjectGet(raw: x.subject)
-                candy1.teacher = teacherGet(raw: x.subject)
+                candy1.location = subjectGet(x.location.displayName)
+                candy1.subject = subjectGet(x.subject)
+                candy1.teacher = teacherGet(x.subject)
                 candy1.start = x.start.dateTime
                 candy1.end = x.end.dateTime
                 candy1.daylink = Day(context: self.moc)
-                candy1.daylink?.date = stripDate(input: x.start.dateTime)
+                candy1.daylink?.date = x.start.dateTime.stripDate()
                 
             }
             try? self.moc.save()
-            cached  = cachedData()
+            cached  = cachedData(CalendarDay)
         }
-        
-        
-        //print(currentResponse)
     }
     
     
@@ -325,19 +144,10 @@ struct TimetableView: View {
         VStack {
             
             ScrollViewReader{ proxy in
-                
-                if cached.isEmpty == false {
-                    Text("loaded")
-                        .onAppear() {
-                            withAnimation{
-                                proxy.scrollTo(stripDate(input: Date.now), anchor: .top)
-                            }
-                        }
-                }
-                
                 Button("Jump to #50") {
                     withAnimation{
-                        proxy.scrollTo(stripDate(input: Date.now), anchor: .top)
+                        
+                        proxy.scrollTo(Date.now.stripDate(), anchor: .top)
                     }
                     
                 }
@@ -345,7 +155,7 @@ struct TimetableView: View {
                 List {
                     
                     ForEach(cached, id: \.self) { x in
-                        Section(dateformat(date: x.keys.first!)) {
+                        Section(x.keys.first!.longdateformat()) {
                             ForEach(x[x.keys.first!]!, id: \.self) { eventObject in
                                 HStack {
 
@@ -386,7 +196,7 @@ struct TimetableView: View {
                                         }
                                         HStack {
                                             Spacer()
-                                            Text("\(String(timeformat(date: eventObject.start))) - \(String(timeformat(date: eventObject.end)))")
+                                            Text("\(eventObject.start.timeformat()) - \(eventObject.end.timeformat())")
                                         }
                                         
 
@@ -399,11 +209,16 @@ struct TimetableView: View {
                         .id(x.keys.first!)
                     }
                 }
-                .onChange(of: cached){
-                    withAnimation{
-                        proxy.scrollTo(stripDate(input: Date.now), anchor: .top)
-                    }
+                .onAppear() {
                     
+                        withAnimation{
+                            proxy.scrollTo(Date.now.stripDate(), anchor: .top)
+                        }
+                    
+                }
+                .onChange(of: cached){
+                    print("changed")
+                    print(cached)
                 }
                 .listStyle(.plain)
                     .navigationTitle("Timetable")
@@ -433,35 +248,15 @@ struct TimetableView: View {
                             removeall()
                             login()
                             
-                        }
-                        
-                        
-                        
-                        
-                        
+                        } 
                     }
-    //                }.task {
-    //                    do {
-    //                        try await login()
-    //                        print(settings.jsonRaw)
-    //                    } catch {
-    //                        print("error")
-    //                    }
-
-                    .onAppear() {
-                        print(cached.isEmpty)
-                            cached = cachedData()
-                            
-                        
-                        
-                            //login()
-                            //print(settings.jsonRaw)
-                            //jsonParser(json: settings.jsonRaw)
-                        
-                        
-                    }
+                    
             }
             
+        }.onAppear() {
+            print(cached.isEmpty)
+                cached = cachedData(CalendarDay)
+                
         }
         
     }

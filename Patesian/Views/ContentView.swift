@@ -22,6 +22,7 @@ struct SettingsView1: View {
 
 struct ContentView: View {
     @StateObject var settings = loginSettings()
+    @StateObject var mainUser = UserInfo()
     var body: some View {
         TabView {
             NavigationStack {
@@ -44,6 +45,7 @@ struct ContentView: View {
             
             NavigationStack {
                 FriendsView()
+                .environmentObject(mainUser)
                 .navigationTitle("Friends")
                 
             }.tabItem {
@@ -62,12 +64,12 @@ struct ContentView: View {
             
             
             NavigationStack {
-                SettingsView()
+                feedView()
             }
             .environmentObject(settings)
             
                 .tabItem {
-                    Label("Settings", systemImage: "gear")
+                    Label("Feed", systemImage: "gear")
                 }
         }
 

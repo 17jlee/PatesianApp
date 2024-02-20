@@ -15,10 +15,6 @@ struct PatesianApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                //.environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
-//        .onChange(of: scenePhase) { _ in
-//            persistenceController.save()
-//        }
     }
 }

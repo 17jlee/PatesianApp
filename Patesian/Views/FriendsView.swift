@@ -8,22 +8,32 @@
 import SwiftUI
 
 struct FriendsView: View {
+    @State var Users = [User]()
+    @StateObject var mainUser = UserInfo()
+    @EnvironmentObject var editMain: UserInfo
+    
     var body: some View {
         VStack {
+            
             List {
-                Text("Yaksh Mithani Gets Banned From the Music Room!")
-                Text("The Magic Number is 46")
-                Text("Michael fumbles another baddie??")
-                Text("Aabha loses another scrunchie???")
-                Text("Jimin Fails Physics in Mocks!?!")
+                Text(mainUser.signedInUser.name)
+                    .environmentObject(mainUser)
+                ForEach(Users, id:\.self) { User in
+                    Text("\(User.username) \(User.name) ")
+                    Image(uiImage: User.profilepic)
+                    
+                }
             }
         }
         .toolbar {
             ToolbarItem(placement: .automatic) {
                 Button {
-                    //listView.toggle()
-                    //print(settings.sortedData)
-                    //cached.append([Date.now : [schoolEvent(subject: "ff", teacher: "gg", location: "hh", start: Date.distantFuture, end: Date.distantPast)]])
+                    Task {
+                        try await Users = resolveUsersTemplate()
+                        print("here")
+                        editMain.signedInUser = Users.first!
+                        
+                    }
                 } label: {
                     Image(systemName: "person.crop.circle")
                 }

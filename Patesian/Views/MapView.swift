@@ -43,7 +43,10 @@ struct MapView: View {
                         
                     Spacer()
                     Button {
-                        
+                        Task {
+                            try await print(resolveUsersTemplate())
+                            print("here")
+                        }
                     } label: {
                         Image(systemName: "person.crop.circle")
                             .resizable()
