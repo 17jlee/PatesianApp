@@ -21,62 +21,27 @@ struct TimetableView: View {
     @State var cached = [[Date: [schoolEvent]]]()
     @State var sortedDict = [[Date : [[String : String]]].Element]()
     @State var listView = false
+    @State var rawResponse = ([[Date: [schoolEvent]]](), graphResponse(value: [schoolEventRaw(subject: "", bodyPreview: "", start: graphDate(dateTime: Date.now), end: graphDate(dateTime: Date.now), location: graphLocation(displayName: ""))]))
     //but heaven aint close in a place like this
 
-    func removeall() async {
+    func clearAll() async {
         for x in CalendarDay {
             moc.delete(x)
         }
         PersistenceController.shared.save()
     }
     
-    
-    
-    func jsonParser(json: Data) -> [[Date: [schoolEvent]]]{
-        let data = json
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS"
-        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-        do {
-            currentResponse = try decoder.decode(graphResponse.self, from: data)
-            coredatawriter(currentResponse: currentResponse!)
-            
-            
-            let result = (dictionaryInit(currentResponse: currentResponse!)).sorted {
-                                            $0.0 < $1.0
-                                        }
-            var surt = [[Date: [schoolEvent]]]()
-            for x in result {
-                surt.append([x.key : x.value])
-                
-            }
-            
-            DispatchQueue.main.async {
-                settings.sortedData = surt
-            }
-            
-            
-            return surt
-        } catch {
-            print(String(describing: error))
-            return ([[Date.now : [schoolEvent(subject: "", teacher: "", location: "", start: Date.now, end: Date.now)]]])
-        }
-        
-    }
-    
-    func coredatawriter(currentResponse: graphResponse) {
+    func coredatawriter(currentResponse: graphResponse) async {
         DispatchQueue.main.async {
             for x in Array(currentResponse.value) {
-                let candy1 = Events(context: self.moc)
-                candy1.location = subjectGet(x.location.displayName)
-                candy1.subject = subjectGet(x.subject)
-                candy1.teacher = teacherGet(x.subject)
-                candy1.start = x.start.dateTime
-                candy1.end = x.end.dateTime
-                candy1.daylink = Day(context: self.moc)
-                candy1.daylink?.date = x.start.dateTime.stripDate()
+                let event = Events(context: self.moc)
+                event.location = subjectGet(x.location.displayName)
+                event.subject = subjectGet(x.subject)
+                event.teacher = teacherGet(x.subject)
+                event.start = x.start.dateTime
+                event.end = x.end.dateTime
+                event.daylink = Day(context: self.moc)
+                event.daylink?.date = x.start.dateTime.stripDate()
                 
             }
             try? self.moc.save()
@@ -176,7 +141,7 @@ struct TimetableView: View {
                         ToolbarItem(placement: .automatic) {
                             Button {
                                 Task {
-                                    await removeall()
+                                    await clearAll()
                                 }
                                 
                                 //print(settings.sortedData)
@@ -198,10 +163,11 @@ struct TimetableView: View {
                     .refreshable {
                         print("Refreshing")
                         DispatchQueue.main.async {
-                            
                             Task {
-                                await removeall()
-                                try await jsonParser(json: login(using: settings, endpoint: URLString()))
+                                await clearAll()
+                                try await rawResponse = jsonParser(json: login(using: settings, endpoint: URLString()))
+                                cached = rawResponse.0
+                                await coredatawriter(currentResponse: rawResponse.1)
                             }
                             
                             
