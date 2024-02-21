@@ -35,6 +35,7 @@ struct ContentView: View {
             NavigationStack {
                 TimetableView()
                 .navigationTitle("Timetable")
+                .environmentObject(loginSettings())
                 
                 
             }

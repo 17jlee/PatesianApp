@@ -36,6 +36,8 @@
 		DB335F9D2AF70F4A0074E261 /* Events+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB335F992AF70F4A0074E261 /* Events+CoreDataClass.swift */; };
 		DB335F9E2AF70F4A0074E261 /* Events+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB335F9A2AF70F4A0074E261 /* Events+CoreDataProperties.swift */; };
 		DB335FA02AF7100B0074E261 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB335F9F2AF7100B0074E261 /* Persistence.swift */; };
+		DB6AA8D92B84BAFB008283A7 /* SignedInUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA8D72B84BAFB008283A7 /* SignedInUser+CoreDataClass.swift */; };
+		DB6AA8DA2B84BAFB008283A7 /* SignedInUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA8D82B84BAFB008283A7 /* SignedInUser+CoreDataProperties.swift */; };
 		DB820A3E2AD686D20014F26B /* MSAL in Frameworks */ = {isa = PBXBuildFile; productRef = DB820A3D2AD686D20014F26B /* MSAL */; };
 		DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB820A412AD687730014F26B /* MSALAuthentication.swift */; };
 		DB9265A62AEBC767001A6BE5 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9265A52AEBC767001A6BE5 /* EventView.swift */; };
@@ -100,6 +102,8 @@
 		DB335F992AF70F4A0074E261 /* Events+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Events+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DB335F9A2AF70F4A0074E261 /* Events+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Events+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DB335F9F2AF7100B0074E261 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		DB6AA8D72B84BAFB008283A7 /* SignedInUser+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedInUser+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DB6AA8D82B84BAFB008283A7 /* SignedInUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedInUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DB820A412AD687730014F26B /* MSALAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALAuthentication.swift; sourceTree = "<group>"; };
 		DB9265A52AEBC767001A6BE5 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		DBBBE0232AEBD74F006E2BB3 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
@@ -221,11 +225,9 @@
 		DB2EFC5C2B8290EC00586C9C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DB6AA8DC2B84BBFF008283A7 /* Day-Event */,
+				DB6AA8DB2B84BBE8008283A7 /* SignedInUser */,
 				DB335F942AF70EC50074E261 /* Main.xcdatamodeld */,
-				DB335F972AF70F4A0074E261 /* Day+CoreDataClass.swift */,
-				DB335F992AF70F4A0074E261 /* Events+CoreDataClass.swift */,
-				DB335F9A2AF70F4A0074E261 /* Events+CoreDataProperties.swift */,
-				DB335F982AF70F4A0074E261 /* Day+CoreDataProperties.swift */,
 				DB335F9F2AF7100B0074E261 /* Persistence.swift */,
 			);
 			path = Model;
@@ -279,6 +281,26 @@
 				DB2EFC4A2B80EB5200586C9C /* FeedView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		DB6AA8DB2B84BBE8008283A7 /* SignedInUser */ = {
+			isa = PBXGroup;
+			children = (
+				DB6AA8D82B84BAFB008283A7 /* SignedInUser+CoreDataProperties.swift */,
+				DB6AA8D72B84BAFB008283A7 /* SignedInUser+CoreDataClass.swift */,
+			);
+			path = SignedInUser;
+			sourceTree = "<group>";
+		};
+		DB6AA8DC2B84BBFF008283A7 /* Day-Event */ = {
+			isa = PBXGroup;
+			children = (
+				DB335F9A2AF70F4A0074E261 /* Events+CoreDataProperties.swift */,
+				DB335F982AF70F4A0074E261 /* Day+CoreDataProperties.swift */,
+				DB335F992AF70F4A0074E261 /* Events+CoreDataClass.swift */,
+				DB335F972AF70F4A0074E261 /* Day+CoreDataClass.swift */,
+			);
+			path = "Day-Event";
 			sourceTree = "<group>";
 		};
 		DBCBE5E52AD5E85F000B58E7 = {
@@ -489,6 +511,7 @@
 				DBBBE0262AEC6A62006E2BB3 /* SettingsView.swift in Sources */,
 				DB2EFC402B80EA9C00586C9C /* templates.swift in Sources */,
 				DB2EFC5B2B828F7200586C9C /* School Event.swift in Sources */,
+				DB6AA8DA2B84BAFB008283A7 /* SignedInUser+CoreDataProperties.swift in Sources */,
 				DB2EFC682B8294B100586C9C /* Dictionary Conversion.swift in Sources */,
 				DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */,
 				DB335F9E2AF70F4A0074E261 /* Events+CoreDataProperties.swift in Sources */,
@@ -506,6 +529,7 @@
 				DBCBE5F22AD5E85F000B58E7 /* PatesianApp.swift in Sources */,
 				DB2EFC352B80EA5000586C9C /* data.swift in Sources */,
 				DB2EFC372B80EA5200586C9C /* Date.swift in Sources */,
+				DB6AA8D92B84BAFB008283A7 /* SignedInUser+CoreDataClass.swift in Sources */,
 				DB2EFC662B82939A00586C9C /* JSON Parser.swift in Sources */,
 				DB2EFC4B2B80EB5200586C9C /* FeedView.swift in Sources */,
 				DB2EFC3E2B80EA9900586C9C /* getPosts.swift in Sources */,

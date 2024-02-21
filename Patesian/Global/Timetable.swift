@@ -12,6 +12,8 @@ import Foundation
     @Published var sortedData = [[Date: [schoolEvent]]]()
     @Published var graphResult = ""
     @Published var jsonRaw = Data()
+    @Published var accessTokenSource = ""
+    @Published var showingAlert = false
     
     init(previewing: Bool = false) {
             if previewing {

@@ -23,63 +23,17 @@ struct TimetableView: View {
     @State var listView = false
     //but heaven aint close in a place like this
 
-    func removeall() {
+    func removeall() async {
         for x in CalendarDay {
             moc.delete(x)
         }
         PersistenceController.shared.save()
     }
     
-    func login() {
-            MSALAuthentication.signin(completion: { securityToken, isTokenCached, expiresOn in
-                if (isTokenCached != nil) && (expiresOn != nil)  {
-                    DispatchQueue.main.async {
-                        settings.isAuthenticated = true
-                    }
-                    accessTokenSource = "Access Token: \(isTokenCached! ? "Cached" : "Newly Acquired") Expires: \(expiresOn!)";
-                    
-                    guard let meUrl = URL(string: URLString()) else {
-                        return
-                    }
-                    
-                    var request = URLRequest(url: meUrl)
-                    
-                    request.httpMethod = "GET"
-                    request.addValue("Bearer \(securityToken!)", forHTTPHeaderField: "Authorization")
-                    
-                    
-                    URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-                        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, error == nil else {
-                            //print(error!.localizedDescription)
-                            return
-                        }
-                        
-                        if let json = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers),
-                           let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
-                            DispatchQueue.main.async {
-                                settings.graphResult = String(decoding: jsonData, as: UTF8.self)
-                            }
-                            DispatchQueue.main.async {
-                                settings.jsonRaw = jsonData
-                            }
-                            jsonParser(json: jsonData)
-                            
-                            //print(jsonData)
-                        } else {
-                            print("An error has ocurred")
-                        }
-                    }).resume()
-                }
-                else {
-                    showingAlert = true
-                }
-                
-            })
-        }
+    
     
     func jsonParser(json: Data) -> [[Date: [schoolEvent]]]{
         let data = json
-        //print(json)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
@@ -112,14 +66,6 @@ struct TimetableView: View {
         
     }
     
-
-    
-    
-
-    
-
-    
-    
     func coredatawriter(currentResponse: graphResponse) {
         DispatchQueue.main.async {
             for x in Array(currentResponse.value) {
@@ -142,6 +88,10 @@ struct TimetableView: View {
     
     var body: some View {
         VStack {
+            
+            Button("print api") {
+                print(settings.graphResult)
+            }
             
             ScrollViewReader{ proxy in
                 Button("Jump to #50") {
@@ -225,7 +175,10 @@ struct TimetableView: View {
                     .toolbar {
                         ToolbarItem(placement: .automatic) {
                             Button {
-                                listView.toggle()
+                                Task {
+                                    await removeall()
+                                }
+                                
                                 //print(settings.sortedData)
                                 //cached.append([Date.now : [schoolEvent(subject: "ff", teacher: "gg", location: "hh", start: Date.distantFuture, end: Date.distantPast)]])
                             } label: {
@@ -245,8 +198,12 @@ struct TimetableView: View {
                     .refreshable {
                         print("Refreshing")
                         DispatchQueue.main.async {
-                            removeall()
-                            login()
+                            
+                            Task {
+                                await removeall()
+                                try await jsonParser(json: login(using: settings, endpoint: URLString()))
+                            }
+                            
                             
                         } 
                     }

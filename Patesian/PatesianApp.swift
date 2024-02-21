@@ -16,5 +16,8 @@ struct PatesianApp: App {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
+        .onChange(of: scenePhase) { _ in
+            persistenceController.save()
+        }
     }
 }
