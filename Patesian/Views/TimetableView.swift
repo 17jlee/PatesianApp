@@ -32,7 +32,6 @@ struct TimetableView: View {
     }
     
     func coredatawriter(currentResponse: graphResponse) async {
-        DispatchQueue.main.async {
             for x in Array(currentResponse.value) {
                 let event = Events(context: self.moc)
                 event.location = subjectGet(x.location.displayName)
@@ -46,7 +45,7 @@ struct TimetableView: View {
             }
             try? self.moc.save()
             cached  = cachedData(CalendarDay)
-        }
+        
     }
     
     
@@ -162,7 +161,7 @@ struct TimetableView: View {
                             }
                     .refreshable {
                         print("Refreshing")
-                        DispatchQueue.main.async {
+
                             Task {
                                 await clearAll()
                                 try await rawResponse = jsonParser(json: login(using: settings, endpoint: URLString()))
@@ -172,7 +171,7 @@ struct TimetableView: View {
                             
                             
                         } 
-                    }
+                    
                     
             }
             
