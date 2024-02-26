@@ -14,7 +14,24 @@ struct feedView: View {
     @State var groups = [Groups]()
     @State var sortedGroups = [String : Groups]()
     @State var createVisible = false
+    let persistenceController = PersistenceController.shared
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date)]) var cachedPosts: FetchedResults<CachedPosts>
 
+    func writePostCache(content: String, user: String, group: String, date: Date, image: UIImage?) async {
+        let post = CachedPosts(context: managedObjectContext)
+        post.content = content
+        post.user = user
+        post.group = group
+        post.date = date
+        post.postimage = image?.pngData()
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     var body: some View {
         NavigationStack{
             ZStack {
@@ -48,8 +65,10 @@ struct feedView: View {
                             .resizable()
                             .scaledToFit()
                         Button(action: {
-                            withAnimation(.linear(duration: 0.2)){
-                                settings.score = nil
+                            DispatchQueue.main.async {
+                                //withAnimation{
+                                    settings.score = nil
+                                //}
                             }
                             
                         }, label: {
@@ -76,9 +95,28 @@ struct feedView: View {
                 }
             }.task {
                 do {
-                    try await posts = resolvePostTemplate()
-                    try await groups = groupsGet()
-                    sortedGroups = sortGroups(groups)
+                    if cachedPosts.isEmpty {
+                        print("empty")
+                        try await posts = resolvePostTemplate()
+                        try await groups = groupsGet()
+                        sortedGroups = sortGroups(groups)
+                        for x in posts {
+                            await writePostCache(content: x.content, user: x.user, group: x.group, date: x.date, image: x.image)
+                        }
+                    }
+                    else {
+                        for x in cachedPosts {
+                            if let currentimage = x.postimage {
+                                posts.append(Posts(user: x.user!, group: x.group!, title: nil, content: x.content!, image: UIImage(data: currentimage), date: x.date!))
+                            }
+                            else {
+                                posts.append(Posts(user: x.user!, group: x.group!, title: nil, content: x.content!, image: nil, date: x.date!))
+                            }
+                            
+                        }
+                        
+                    }
+                    
                     print(sortedGroups)
                     print(posts)
                 }

@@ -28,7 +28,7 @@ struct graphResponse: Codable {
     var value: [schoolEventRaw]
 }
 
-struct schoolEvent: Hashable {
+struct schoolEvent: Codable, Hashable {
     var subject: String
     var teacher: String
     var location: String

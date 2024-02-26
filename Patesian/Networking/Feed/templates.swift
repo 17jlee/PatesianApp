@@ -12,6 +12,11 @@ struct Wrapper: Codable {
     let posts: [templatePosts]
 }
 
+struct timetableWrapper: Codable {
+    let user: String
+    let data: [schoolEvent]
+}
+
 struct groupWrapper: Codable {
     let groups: [templateGroups]
 }

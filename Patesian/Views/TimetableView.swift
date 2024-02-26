@@ -44,7 +44,7 @@ struct TimetableView: View {
                 
             }
             try? self.moc.save()
-            cached  = cachedData(CalendarDay)
+            cached = cachedData(CalendarDay)
         
     }
     
@@ -126,8 +126,14 @@ struct TimetableView: View {
                 .onAppear() {
                     
                         withAnimation{
-                            proxy.scrollTo(Date.now.stripDate(), anchor: .top)
+                            
                         }
+                    Task {
+                        
+                            cached = cachedData(CalendarDay)
+                            proxy.scrollTo(Date.now.stripDate(), anchor: .top)
+                        
+                    }
                     
                 }
                 .onChange(of: cached){
@@ -142,9 +148,6 @@ struct TimetableView: View {
                                 Task {
                                     await clearAll()
                                 }
-                                
-                                //print(settings.sortedData)
-                                //cached.append([Date.now : [schoolEvent(subject: "ff", teacher: "gg", location: "hh", start: Date.distantFuture, end: Date.distantPast)]])
                             } label: {
                                 if listView {
                                     Image(systemName: "calendar")
@@ -161,7 +164,6 @@ struct TimetableView: View {
                             }
                     .refreshable {
                         print("Refreshing")
-
                             Task {
                                 await clearAll()
                                 try await rawResponse = jsonParser(json: login(using: settings, endpoint: URLString()))
@@ -177,7 +179,7 @@ struct TimetableView: View {
             
         }.onAppear() {
             print(cached.isEmpty)
-                cached = cachedData(CalendarDay)
+                //cached = cachedData(CalendarDay)
                 
         }
         

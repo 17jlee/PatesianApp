@@ -38,8 +38,10 @@ struct imagePost: View {
                     .resizable()
                     .scaledToFit()
                 Button(action: {
-                    withAnimation(.linear(duration: 0.2)) {
-                        settings.score = image
+                    DispatchQueue.main.async {
+                        //withAnimation {
+                            settings.score = image
+                        //}
                     }
                     
                 }, label: {

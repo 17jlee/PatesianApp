@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23D60" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="CachedPosts" representedClassName="CachedPosts" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="group" optional="YES" attributeType="String"/>
+        <attribute name="postimage" optional="YES" attributeType="Binary"/>
+        <attribute name="user" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Day" representedClassName="Day" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="eventlink" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Events" inverseName="daylink" inverseEntity="Events"/>
@@ -17,12 +24,20 @@
         <attribute name="teacher" optional="YES" attributeType="String"/>
         <relationship name="daylink" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="eventlink" inverseEntity="Day"/>
     </entity>
+    <entity name="LastUpdate" representedClassName="LastUpdate" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
     <entity name="SignedInUser" representedClassName="SignedInUser" syncable="YES">
-        <attribute name="friends" optional="YES" attributeType="Transformable"/>
+        <attribute name="friends" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="profilepic" optional="YES" attributeType="Binary"/>
-        <attribute name="requestsFrom" optional="YES" attributeType="Transformable"/>
-        <attribute name="subscribedGroups" optional="YES" attributeType="Transformable"/>
+        <attribute name="requestsFrom" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer"/>
+        <attribute name="subscribedGroups" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer"/>
+        <attribute name="username" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Users" representedClassName="Users" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="profilepic" optional="YES" attributeType="Binary"/>
         <attribute name="username" optional="YES" attributeType="String"/>
     </entity>
 </model>

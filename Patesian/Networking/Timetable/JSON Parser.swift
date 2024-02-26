@@ -18,7 +18,6 @@ func jsonParser(json: Data) -> (dictionary: [[Date: [schoolEvent]]], graph: grap
     decoder.dateDecodingStrategy = .formatted(dateFormatter)
     do {
         currentResponse = try decoder.decode(graphResponse.self, from: data)
-        //coredatawriter(currentResponse: currentResponse!)
         let result = (dictionaryInit(currentResponse: currentResponse!)).sorted {
                                         $0.0 < $1.0
                                     }
@@ -34,4 +33,30 @@ func jsonParser(json: Data) -> (dictionary: [[Date: [schoolEvent]]], graph: grap
         return (dictionary: [[Date.now : [schoolEvent(subject: "", teacher: "", location: "", start: Date.now, end: Date.now)]]], graph: graphResponse(value: [schoolEventRaw(subject: "", bodyPreview: "", start: graphDate(dateTime: Date.now), end: graphDate(dateTime: Date.now), location: graphLocation(displayName: ""))]))
     }
     
+}
+
+
+func uploadjsonParser(json: Data) -> [schoolEvent]{
+    let data = json
+    var events = [schoolEvent]()
+    var currentResponse: graphResponse? = nil
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS"
+    dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .formatted(dateFormatter)
+    do {
+        currentResponse = try decoder.decode(graphResponse.self, from: data)
+        if let list = currentResponse?.value {
+            for x in list {
+                events.append(schoolEvent(subject: subjectGet(x.subject), teacher: teacherGet(x.subject), location: subjectGet(x.location.displayName), start: x.start.dateTime, end: x.end.dateTime))
+            }
+        }
+        return (events)
+        
+    } 
+    catch {
+        print(error)
+    }
+    return events
 }

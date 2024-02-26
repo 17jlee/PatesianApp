@@ -21,6 +21,8 @@ extension CLLocationCoordinate2D {
 }
 
 struct MapView: View {
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var signedinuser: FetchedResults<SignedInUser>
+    @State var cardVisible = false
     var body: some View {
         ZStack {
             
@@ -32,19 +34,27 @@ struct MapView: View {
             }
             VStack {
                 HStack {
-                    Text("Good afternoon, Sebastian")
-                        .padding()
-                        //.font(.title3)
-                        .font(.headline)
-                        
-                        .bold()
-                        //
+                    if let loggedin = signedinuser.first {
+                        Text("Good afternoon, \(loggedin.name!)")
+                            .padding()
+                            .font(.headline)
+                            .bold()
+                    }
+                    else {
+                        Text("Good afternoon")
+                            .padding()
+                            .font(.headline)
+                            .bold()
+                    }
+
                         
                         
                     Spacer()
                     Button {
                         Task {
-                            try await print(resolveUsersTemplate())
+                            cardVisible.toggle()
+                            //try await print(resolveUsersTemplate())
+                            //print(signedinuser.first!.name)
                             print("here")
                         }
                     } label: {
@@ -64,7 +74,17 @@ struct MapView: View {
             }
             
             
-        }
+        }.popover(isPresented: $cardVisible, content: {
+            NavigationStack{
+                UserSettings()
+                    .environmentObject(loginSettings())
+                    .navigationTitle("Profile")
+            }
+            
+            Button("Quit"){
+                cardVisible.toggle()
+            }
+        })
         
         
     }

@@ -12,7 +12,7 @@ struct userWrapper: Codable {
     let users: [templateUser]
 }
 
-struct templateUser: Codable {
+struct templateUser: Hashable, Codable {
     let username: String
     let name: String
     let subscribedGroups: [String]
@@ -24,10 +24,10 @@ struct templateUser: Codable {
 struct User: Hashable {
     let username: String
     let name: String
-    let subscribedGroups: [String]
-    let profilepic: UIImage
-    let requestsFrom: [String]
-    let friends: [String]
+    let subscribedGroups: [String]?
+    let profilepic: UIImage?
+    let requestsFrom: [String]?
+    let friends: [String]?
 }
 
 func performUsersCall() async throws -> [templateUser] {
@@ -37,6 +37,28 @@ func performUsersCall() async throws -> [templateUser] {
     let userWrapper = try decoder.decode(userWrapper.self, from: data)
     //print(error)
     return userWrapper.users
+}
+
+
+
+func patesidGet(_ raw: String) -> String {
+        if raw.contains("@") {
+            let str = raw
+            let teacherStart = str.range(of: "@")!.upperBound
+            let teacherEnd = str.endIndex
+
+            let subjectEnd = str.range(of: "@")!.lowerBound
+            let subjectStart = str.startIndex
+            let subjectRange = subjectStart..<subjectEnd
+
+            let subjectSubstring = str[subjectRange]  // play
+            
+            return String(subjectSubstring)
+        
+    }
+    else {
+        return("")
+    }
 }
 
 func resolveUsersTemplate() async throws -> [User] {

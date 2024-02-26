@@ -126,13 +126,13 @@
             filePath = "Patesian/Views/SettingsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
                <Location
-                  uuid = "2BB87B2B-FD34-404D-9A94-0DBEDE2E59A2 - 16307545524e76bf"
+                  uuid = "2BB87B2B-FD34-404D-9A94-0DBEDE2E59A2 - 16307545524e76de"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -142,12 +142,42 @@
                   urlString = "file:///Users/jiminlee/Library/Mobile%20Documents/com~apple~CloudDocs/projectMarauder/Patesian/Patesian/Views/SettingsView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "122"
-                  endingLineNumber = "122"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "1420">
+               </Location>
+               <Location
+                  uuid = "2BB87B2B-FD34-404D-9A94-0DBEDE2E59A2 - 16307545524e76de"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable () -&gt; () in closure #5 () -&gt; () in Patesian.SettingsView.body.getter : some"
+                  moduleName = "Patesian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jiminlee/Library/Mobile%20Documents/com~apple~CloudDocs/projectMarauder/Patesian/Patesian/Views/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "1536">
+               </Location>
+               <Location
+                  uuid = "2BB87B2B-FD34-404D-9A94-0DBEDE2E59A2 - 16307545524e76de"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable () -&gt; () in closure #5 () -&gt; () in Patesian.SettingsView.body.getter : some"
+                  moduleName = "Patesian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jiminlee/Library/Mobile%20Documents/com~apple~CloudDocs/projectMarauder/Patesian/Patesian/Views/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
                   offsetFromSymbolStart = "352">
                </Location>
                <Location
-                  uuid = "2BB87B2B-FD34-404D-9A94-0DBEDE2E59A2 - 16307545524e76bf"
+                  uuid = "2BB87B2B-FD34-404D-9A94-0DBEDE2E59A2 - 16307545524e76de"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -157,8 +187,8 @@
                   urlString = "file:///Users/jiminlee/Library/Mobile%20Documents/com~apple~CloudDocs/projectMarauder/Patesian/Patesian/Views/SettingsView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "122"
-                  endingLineNumber = "122"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
                   offsetFromSymbolStart = "1356">
                </Location>
             </Locations>

@@ -53,13 +53,13 @@ struct ContentView: View {
                 Label("Friends", systemImage: "person.3")
             }
             
-            NavigationStack {
-                EventView()
-                    .navigationTitle("Events")
-            }
-                .tabItem {
-                    Label("Events", systemImage: "clock")
-                }
+//            NavigationStack {
+//                EventView()
+//                    .navigationTitle("Events")
+//            }
+//                .tabItem {
+//                    Label("Events", systemImage: "clock")
+//                }
             
             
             

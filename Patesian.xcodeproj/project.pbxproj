@@ -38,9 +38,13 @@
 		DB335FA02AF7100B0074E261 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB335F9F2AF7100B0074E261 /* Persistence.swift */; };
 		DB6AA8D92B84BAFB008283A7 /* SignedInUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA8D72B84BAFB008283A7 /* SignedInUser+CoreDataClass.swift */; };
 		DB6AA8DA2B84BAFB008283A7 /* SignedInUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA8D82B84BAFB008283A7 /* SignedInUser+CoreDataProperties.swift */; };
+		DB6AA8DE2B863445008283A7 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA8DD2B863445008283A7 /* UserSettings.swift */; };
+		DB6AA8E12B86B6DA008283A7 /* CachedPosts+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA8DF2B86B6DA008283A7 /* CachedPosts+CoreDataClass.swift */; };
+		DB6AA8E22B86B6DA008283A7 /* CachedPosts+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA8E02B86B6DA008283A7 /* CachedPosts+CoreDataProperties.swift */; };
 		DB820A3E2AD686D20014F26B /* MSAL in Frameworks */ = {isa = PBXBuildFile; productRef = DB820A3D2AD686D20014F26B /* MSAL */; };
 		DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB820A412AD687730014F26B /* MSALAuthentication.swift */; };
 		DB9265A62AEBC767001A6BE5 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9265A52AEBC767001A6BE5 /* EventView.swift */; };
+		DBA354162B8A9A9F0063416A /* Update User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA354152B8A9A9F0063416A /* Update User.swift */; };
 		DBBBE0242AEBD74F006E2BB3 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBBE0232AEBD74F006E2BB3 /* FriendsView.swift */; };
 		DBBBE0262AEC6A62006E2BB3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBBE0252AEC6A62006E2BB3 /* SettingsView.swift */; };
 		DBCBE5F22AD5E85F000B58E7 /* PatesianApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCBE5F12AD5E85F000B58E7 /* PatesianApp.swift */; };
@@ -104,8 +108,12 @@
 		DB335F9F2AF7100B0074E261 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		DB6AA8D72B84BAFB008283A7 /* SignedInUser+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedInUser+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DB6AA8D82B84BAFB008283A7 /* SignedInUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedInUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DB6AA8DD2B863445008283A7 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		DB6AA8DF2B86B6DA008283A7 /* CachedPosts+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CachedPosts+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DB6AA8E02B86B6DA008283A7 /* CachedPosts+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CachedPosts+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DB820A412AD687730014F26B /* MSALAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALAuthentication.swift; sourceTree = "<group>"; };
 		DB9265A52AEBC767001A6BE5 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
+		DBA354152B8A9A9F0063416A /* Update User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Update User.swift"; sourceTree = "<group>"; };
 		DBBBE0232AEBD74F006E2BB3 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		DBBBE0252AEC6A62006E2BB3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		DBCBE5EE2AD5E85F000B58E7 /* Patesian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patesian.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				DB2EFC4F2B81343500586C9C /* GetUsers.swift */,
+				DBA354152B8A9A9F0063416A /* Update User.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -253,6 +262,7 @@
 		DB335F622AF701AF0074E261 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				DBED064B2B86B80F003DD09B /* Post Cache */,
 				DB2EFC5D2B8290FC00586C9C /* Cache */,
 				DB2EFC5C2B8290EC00586C9C /* Model */,
 			);
@@ -279,6 +289,7 @@
 				DB9265A52AEBC767001A6BE5 /* EventView.swift */,
 				DBFA9C422AFA4A2900935B93 /* MapView.swift */,
 				DB2EFC4A2B80EB5200586C9C /* FeedView.swift */,
+				DB6AA8DD2B863445008283A7 /* UserSettings.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -367,6 +378,15 @@
 				DBCBE60E2AD5E861000B58E7 /* PatesianUITestsLaunchTests.swift */,
 			);
 			path = PatesianUITests;
+			sourceTree = "<group>";
+		};
+		DBED064B2B86B80F003DD09B /* Post Cache */ = {
+			isa = PBXGroup;
+			children = (
+				DB6AA8DF2B86B6DA008283A7 /* CachedPosts+CoreDataClass.swift */,
+				DB6AA8E02B86B6DA008283A7 /* CachedPosts+CoreDataProperties.swift */,
+			);
+			path = "Post Cache";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -515,7 +535,9 @@
 				DB2EFC682B8294B100586C9C /* Dictionary Conversion.swift in Sources */,
 				DB820A422AD687730014F26B /* MSALAuthentication.swift in Sources */,
 				DB335F9E2AF70F4A0074E261 /* Events+CoreDataProperties.swift in Sources */,
+				DB6AA8DE2B863445008283A7 /* UserSettings.swift in Sources */,
 				DB2EFC492B80EACF00586C9C /* textPost.swift in Sources */,
+				DB6AA8E22B86B6DA008283A7 /* CachedPosts+CoreDataProperties.swift in Sources */,
 				DB2EFC6C2B834CED00586C9C /* User Info.swift in Sources */,
 				DB2EFC642B82935B00586C9C /* Endpoint.swift in Sources */,
 				DBCBE5F42AD5E85F000B58E7 /* ContentView.swift in Sources */,
@@ -540,6 +562,8 @@
 				DB335F9B2AF70F4A0074E261 /* Day+CoreDataClass.swift in Sources */,
 				DB335F962AF70EC50074E261 /* Main.xcdatamodeld in Sources */,
 				DB2EFC5F2B82916600586C9C /* ResolveCache.swift in Sources */,
+				DB6AA8E12B86B6DA008283A7 /* CachedPosts+CoreDataClass.swift in Sources */,
+				DBA354162B8A9A9F0063416A /* Update User.swift in Sources */,
 				DB2EFC472B80EACD00586C9C /* postCreationView.swift in Sources */,
 				DB335F9C2AF70F4A0074E261 /* Day+CoreDataProperties.swift in Sources */,
 				DB9265A62AEBC767001A6BE5 /* EventView.swift in Sources */,
