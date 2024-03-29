@@ -32,6 +32,12 @@ struct feedView: View {
         }
     }
     
+    func clearAll() async {
+        for x in cachedPosts {
+            managedObjectContext.delete(x)
+        }
+    }
+    
     var body: some View {
         NavigationStack{
             ZStack {
@@ -100,6 +106,7 @@ struct feedView: View {
                         try await posts = resolvePostTemplate()
                         try await groups = groupsGet()
                         sortedGroups = sortGroups(groups)
+                        await clearAll()
                         for x in posts {
                             await writePostCache(content: x.content, user: x.user, group: x.group, date: x.date, image: x.image)
                         }
@@ -147,6 +154,11 @@ struct feedView: View {
                         try await posts = resolvePostTemplate()
                         try await groups = groupsGet()
                         sortedGroups = sortGroups(groups)
+                        await clearAll()
+                        for x in posts {
+                            await writePostCache(content: x.content, user: x.user, group: x.group, date: x.date, image: x.image)
+                        }
+                        
                         print(sortedGroups)
                         print(posts)
                     }

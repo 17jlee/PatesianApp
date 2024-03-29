@@ -53,18 +53,18 @@ struct TimetableView: View {
     var body: some View {
         VStack {
             
-            Button("print api") {
-                print(settings.graphResult)
-            }
+//            Button("print api") {
+//                print(settings.graphResult)
+//            }
             
             ScrollViewReader{ proxy in
-                Button("Jump to #50") {
-                    withAnimation{
-                        
-                        proxy.scrollTo(Date.now.stripDate(), anchor: .top)
-                    }
-                    
-                }
+//                Button("Jump to #50") {
+//                    withAnimation{
+//                        
+//                        proxy.scrollTo(Date.now.stripDate(), anchor: .top)
+//                    }
+//                    
+//                }
                 
                 List {
                     

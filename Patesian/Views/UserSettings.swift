@@ -174,6 +174,7 @@ struct UserSettings: View {
         Task {
             try await rawinfo = login(using: settings, endpoint: "https://graph.microsoft.com/v1.0/me?$select=displayName,givenName,surname,mail")
             try await rawpfpinfo = login(using: settings, endpoint: "https://graph.microsoft.com/v1.0/me/photo/$value")
+            print(rawpfpinfo)
             if let image = UIImage(data: rawpfpinfo) {
                 pfp = image
                 print(image)
@@ -182,18 +183,54 @@ struct UserSettings: View {
             loggedininfo = try decoder.decode(loggedinapi.self, from: rawinfo)
             print(loggedininfo)
             if let mail = loggedininfo?.mail {
+                print("worked?")
                 print(mail)
                 let url = URL(string: "https://api.inertiablogs.com/users/\(patesidGet(mail).lowercased())")!
                 //let url = URL(string: "https://api.inertiablogs.com/users/\("18jlee")")!
                 print(url)
                 let (data, _) = try await URLSession.shared.data(from: url)
                 let decoder = JSONDecoder()
-                serverResponse = try decoder.decode(userWrapper.self, from: data)
+                do {
+                    serverResponse = try decoder.decode(userWrapper.self, from: data)
+                }
+                catch {
+                    print(error)
+                    print("empty") //upload the profile
+                    uploadUser = User(username: patesidGet(loggedininfo!.mail).lowercased(), name: loggedininfo!.displayName, subscribedGroups: [], profilepic: pfp, requestsFrom: [], friends: [])
+                    guard let request = uploadUserRequest(uploadUser!) else {
+                        return
+                    }
+                    let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                        // Handle the server response here
+                        if let error = error {
+                            print("Error: \(error.localizedDescription)")
+                            return
+                        }
+
+                        // Process the response data
+                        if let data = data {
+                            let responseString = String(data: data, encoding: .utf8)
+                            print("Response: \(responseString ?? "")")
+                        }
+                    }
+
+                    // Start the URLSession task
+                    task.resume()
+                    await clearAll()
+                    
+                    await addSignedUser(name: loggedininfo!.givenName, username: patesidGet(loggedininfo!.mail).lowercased(), friends: [], profilepic: rawpfpinfo, requestsFrom: [], subscribedGroups: [])
+                    return 
+                    
+                    
+                }
                 print(data)
+                
                 print("bruh \(serverResponse)")
             }
             print("to save here")
+            print(serverResponse)
             if let confirmed = serverResponse {
+                print("it works maybe\(confirmed.users)")
                 if confirmed.users.isEmpty {
                     print("empty") //upload the profile
                     uploadUser = User(username: patesidGet(loggedininfo!.mail).lowercased(), name: loggedininfo!.displayName, subscribedGroups: [], profilepic: pfp, requestsFrom: [], friends: [])

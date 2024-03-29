@@ -13,6 +13,8 @@ struct createPost: View {
     @State private var avatarItem: PhotosPickerItem?
     @State private var avatarImage: UIImage?
     @State private var imageData: Data?
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var currentsign: FetchedResults<SignedInUser>
+    
     @State var content = ""
     var groups = ["pgscompsoc", "pgsd&acommitee", "york", "richmond"]
     @State private var selectedGroup = "pgscompsoc"
@@ -100,23 +102,26 @@ struct createPost: View {
             }
             
             Button("Upload") {
-                let request = imagePostRequest(user: "17jlee", group: "pgscompsoc", content: "Cafuné", image: avatarImage!)
-                let task = URLSession.shared.dataTask(with: request!) { (data, response, error) in
-                    // Handle the server response here
-                    if let error = error {
-                        print("Error: \(error.localizedDescription)")
-                        return
+                if let user = currentsign.first?.username{
+                    let request = imagePostRequest(user: user, group: selectedGroup, content: content, image: avatarImage!)
+                    let task = URLSession.shared.dataTask(with: request!) { (data, response, error) in
+                        // Handle the server response here
+                        if let error = error {
+                            print("Error: \(error.localizedDescription)")
+                            return
+                        }
+
+                        // Process the response data
+                        if let data = data {
+                            let responseString = String(data: data, encoding: .utf8)
+                            print("Response: \(responseString ?? "")")
+                        }
                     }
 
-                    // Process the response data
-                    if let data = data {
-                        let responseString = String(data: data, encoding: .utf8)
-                        print("Response: \(responseString ?? "")")
-                    }
+                    // Start the URLSession task
+                    task.resume()
                 }
-
-                // Start the URLSession task
-                task.resume()
+                
 
                 
                 
