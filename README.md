@@ -2,6 +2,8 @@
 
 As a student at Pate's, I found myself navigating the campus with a paper map and texting screenshots of my timetable to coordinate with friends. I built Patesian as my final school programming project to create a modern, all-in-one solution that I wish I'd had.
 
+![Screenshot](images/patesian.webp)
+
 This repository contains the source code for the native iOS application.
 
 ## Core Features & Technology
